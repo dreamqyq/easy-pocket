@@ -16,6 +16,7 @@ const Wrapper = styled.div`
 `;
 const Main = styled.main`
   flex: 1;
+  overflow: auto;
 `;
 
 

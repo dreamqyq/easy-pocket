@@ -9,7 +9,8 @@ const NavWrap = styled.nav`
     >li{
       width: 33.333%;
       text-align: center;
-      padding: 10px 0;
+      padding: 15px 0;
+      line-height: 26px;
     }
   }
 `;
