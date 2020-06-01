@@ -20,13 +20,13 @@ const Nav = () => {
     <NavWrap>
       <ul>
         <li>
-          <Link to="/tags">标签</Link>
+          <Link to="/tags" replace>标签</Link>
         </li>
         <li>
-          <Link to="/pocket">记账</Link>
+          <Link to="/pocket" replace>记账</Link>
         </li>
         <li>
-          <Link to="/statistics">统计</Link>
+          <Link to="/statistics" replace>统计</Link>
         </li>
       </ul>
     </NavWrap>
