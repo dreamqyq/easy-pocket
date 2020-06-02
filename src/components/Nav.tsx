@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-import React from "react";
-import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import React from 'react';
+import styled from 'styled-components';
+// require('icons/iconfont.js');
 
 const NavWrap = styled.nav`
   >ul{
@@ -20,6 +21,14 @@ const Nav = () => {
     <NavWrap>
       <ul>
         <li>
+          <svg
+            className="icon"
+            aria-hidden="true"
+          >
+            <use
+              xlinkHref="#icon-zhifubao-gray"
+            />
+          </svg>
           <Link to="/tags" replace>标签</Link>
         </li>
         <li>

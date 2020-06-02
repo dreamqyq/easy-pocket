@@ -1,13 +1,13 @@
-import React from "react";
-import "./App.scss";
+import React from 'react';
+import './App.scss';
 import {
   HashRouter as Router,
   Switch,
   Route,
   Redirect
-} from "react-router-dom";
-import styled from "styled-components";
-import Nav from "./components/Nav";
+} from 'react-router-dom';
+import styled from 'styled-components';
+import Nav from './components/Nav';
 
 const Wrapper = styled.div`
   height: 100vh;
