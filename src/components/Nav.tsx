@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';
-// require('icons/iconfont.js');
+require("icons/pocket.svg")
+require("icons/statistics.svg")
+require("icons/tag.svg")
 
 const NavWrap = styled.nav`
   >ul{
@@ -26,15 +28,31 @@ const Nav = () => {
             aria-hidden="true"
           >
             <use
-              xlinkHref="#icon-zhifubao-gray"
+              xlinkHref="#tag"
             />
           </svg>
           <Link to="/tags" replace>标签</Link>
         </li>
         <li>
+          <svg
+            className="icon"
+            aria-hidden="true"
+          >
+            <use
+              xlinkHref="#pocket"
+            />
+          </svg>
           <Link to="/pocket" replace>记账</Link>
         </li>
         <li>
+          <svg
+            className="icon"
+            aria-hidden="true"
+          >
+            <use
+              xlinkHref="#statistics"
+            />
+          </svg>
           <Link to="/statistics" replace>统计</Link>
         </li>
       </ul>
