@@ -10,8 +10,12 @@ const NavWrap = styled.nav`
     >li{
       width: 33.333%;
       text-align: center;
-      padding: 15px 0;
+      padding: 7px 0;
       line-height: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
   }
 `;
