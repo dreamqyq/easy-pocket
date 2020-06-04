@@ -11,32 +11,40 @@ import Pocket from 'views/Pocket';
 import Statistics from 'views/Statistics';
 import NoMatch from 'views/NoMatch';
 import Layout from "./components/Layout";
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  color: #333;
+`
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/tags">
-          <Layout>
-            <Tags/>
-          </Layout>
-        </Route>
-        <Route path="/pocket">
-          <Layout>
-            <Pocket />
-          </Layout>
-        </Route>
-        <Route path="/statistics">
-          <Layout>
-            <Statistics />
-          </Layout>
-        </Route>
-        <Redirect exact from="/" to="/tags" />
-        <Route path="*">
-          <NoMatch />
-        </Route>
-      </Switch>
-    </Router >
+    <Wrapper>
+      <Router>
+        <Switch>
+          <Route path="/tags">
+            <Layout>
+              <Tags />
+            </Layout>
+          </Route>
+          <Route path="/pocket">
+            <Layout>
+              <Pocket />
+            </Layout>
+          </Route>
+          <Route path="/statistics">
+            <Layout>
+              <Statistics />
+            </Layout>
+          </Route>
+          <Redirect exact from="/" to="/tags" />
+          <Route path="*">
+            <NoMatch />
+          </Route>
+        </Switch>
+      </Router >
+    </Wrapper>
+
   );
 }
 

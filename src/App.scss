@@ -13,6 +13,9 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+:focus{
+  outline: none;
+}
 
 ul, ol {
   list-style-type: none;
@@ -25,11 +28,15 @@ a {
   -webkit-user-select: none; /* WebKit内核私有属性 */
   user-select: none; /* CSS3属性 */
 }
+button {
+  font-family: inherit;
+}
 
 body {
   font-family: $font-normal;
   line-height: 1.2;
   font-size: 16px;
+  background: #E6E6E8;
 }
 .icon {
   width: 1em; height: 1em;
