@@ -10,7 +10,6 @@ import Tags from 'views/Tags';
 import Pocket from 'views/Pocket';
 import Statistics from 'views/Statistics';
 import NoMatch from 'views/NoMatch';
-import Layout from "./components/Layout";
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -23,19 +22,13 @@ function App() {
       <Router>
         <Switch>
           <Route path="/tags">
-            <Layout>
-              <Tags />
-            </Layout>
+            <Tags />
           </Route>
           <Route path="/pocket">
-            <Layout>
-              <Pocket />
-            </Layout>
+            <Pocket />
           </Route>
           <Route path="/statistics">
-            <Layout>
-              <Statistics />
-            </Layout>
+            <Statistics />
           </Route>
           <Redirect exact from="/" to="/tags" />
           <Route path="*">

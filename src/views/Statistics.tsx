@@ -1,6 +1,11 @@
 import React from 'react';
+import Layout from 'components/Layout';
 const Statistics = () => {
-  return <h2>统计页</h2>;
+  return (
+    <Layout>
+      <h2>统计页</h2>
+    </Layout>
+  );
 }
 
 export default Statistics;

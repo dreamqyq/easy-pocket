@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Layout from 'components/Layout';
 
 const TagsWrap = styled.section`
   background: #fff;
@@ -22,7 +23,7 @@ const TagButton = styled.button`
 const AddTagButton = styled.button``
 const Tags = () => {
   return (
-    <div>
+    <Layout>
       <TagsWrap>
         <ol>
           <li>
@@ -82,7 +83,7 @@ const Tags = () => {
           </div>
         </div>
       </section>
-    </div>
+    </Layout>
   )
 }
 

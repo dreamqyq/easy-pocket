@@ -13,7 +13,7 @@ const Main = styled.main`
 `;
 
 type Props = {
-  children: React.ReactChild
+  children: React.ReactFragment
 }
 const Layout = (props: Props) => {
   return (
