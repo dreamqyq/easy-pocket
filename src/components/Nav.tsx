@@ -15,6 +15,7 @@ const NavWrap = styled.nav`
         padding: 14px 0;
         display: inline-block;
         width: 100%;
+        font-size: 20px;
         &.active{
           color: red;
           svg{
@@ -33,19 +34,19 @@ const Nav = () => {
         <li>
           <NavLink to="/tags" exact replace activeClassName="active">
             <Icon name="tags" />
-            标签
+            &nbsp;标签
           </NavLink>
         </li>
         <li>
           <NavLink to="/pocket" exact replace activeClassName='active'>
             <Icon name="pocket" />
-            记账
+            &nbsp;记账
             </NavLink>
         </li>
         <li>
           <NavLink to="/statistics" exact replace activeClassName='active'>
             <Icon name="statistics" />
-            统计
+            &nbsp;统计
             </NavLink>
         </li>
       </ul>
