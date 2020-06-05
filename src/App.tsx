@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.scss';
+import './normal.scss';
 import {
   HashRouter as Router,
   Switch,
