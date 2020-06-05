@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';
-import Icon from 'components/Icon'
+import Icon from 'components/Icon';
 
 const NavWrap = styled.nav`
-  background: #fff;
+  background: #f5f5f5;
   >ul{
   box-shadow: 0 0 3px rgba(0,0,0,0.25);
     display:flex;
@@ -42,13 +42,13 @@ const Nav = () => {
           <NavLink to="/pocket" exact replace activeClassName='active'>
             <Icon name="pocket" />
             &nbsp;记账
-            </NavLink>
+          </NavLink>
         </li>
         <li>
           <NavLink to="/statistics" exact replace activeClassName='active'>
             <Icon name="statistics" />
             &nbsp;统计
-            </NavLink>
+          </NavLink>
         </li>
       </ul>
     </NavWrap>

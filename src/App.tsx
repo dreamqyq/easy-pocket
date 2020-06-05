@@ -14,7 +14,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   color: #333;
-`
+`;
 
 function App() {
   return (
@@ -35,9 +35,8 @@ function App() {
             <NoMatch />
           </Route>
         </Switch>
-      </Router >
+      </Router>
     </Wrapper>
-
   );
 }
 
