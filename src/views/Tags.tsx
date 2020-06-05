@@ -10,7 +10,7 @@ const TagsWrap = styled.section`
       margin: 5px;
     }
   }
-`
+`;
 const TagButton = styled.button`
   font-size: 14px;
   border-radius: 18px;
@@ -19,8 +19,8 @@ const TagButton = styled.button`
   color: #484848; 
   border: none;
   background: #D9D9D9;
-`
-const AddTagButton = styled.button``
+`;
+const AddTagButton = styled.button``;
 const Tags = () => {
   return (
     <Layout>
@@ -46,7 +46,7 @@ const Tags = () => {
       <section>
         <label>
           备注
-        <input type="text" placeholder="在这里添加备注" />
+          <input type="text" placeholder="在这里添加备注" />
         </label>
       </section>
 
@@ -58,33 +58,25 @@ const Tags = () => {
       <section>
         <div>100</div>
         <div>
-          <div>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>删除</button>
-          </div>
-          <div>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>清空</button>
-          </div>
-          <div>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>OK</button>
-          </div>
-          <div>
-            <button>0</button>
-            <button>.</button>
-            <button>%</button>
-          </div>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>删除</button>
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button>清空</button>
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button>OK</button>
+          <button>0</button>
+          <button>.</button>
+          <button>%</button>
         </div>
       </section>
     </Layout>
-  )
-}
+  );
+};
 
 export default Tags;
