@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Layout from 'components/Layout';
 import { TagsSection } from './TagsSection';
-import { NotesSection } from './NotesSection';
+import { NoteSection } from './NoteSection';
 import { CategorySection } from './CategorySection';
 import { NumberPadSection } from './NumberPadSection';
 
@@ -15,13 +15,7 @@ const Pocket = () => {
   return (
     <PocketLayout>
       <TagsSection />
-      <NotesSection>
-        <label>
-          <span>备注</span>
-          <input type="text" placeholder="在这里添加备注" />
-        </label>
-      </NotesSection>
-
+      <NoteSection />
       <CategorySection>
         <ul>
           <li className='active'>支出</li>
