@@ -2,9 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import Layout from 'components/Layout';
 
+const PocketLayout = styled(Layout)`
+  display: flex;
+  flex-direction: column;
+`;
 const TagsSection = styled.section`
   background: #fff;
   padding: 12px 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
   > ol{
     margin-left: -12px;
     > li{
@@ -25,7 +34,6 @@ const TagsSection = styled.section`
     margin-top: 8px;
   }
 `;
-
 const NotesSection = styled.section`
   background: #f5f5f5;
   padding: 0 16px;
@@ -46,7 +54,6 @@ const NotesSection = styled.section`
     }
   }
 `;
-
 const CategorySection = styled.section`
   font-size: 24px;
   line-height: 72px;
@@ -72,7 +79,6 @@ const CategorySection = styled.section`
     }
   } 
 `;
-
 const NumberPadSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -134,7 +140,7 @@ const NumberPadSection = styled.section`
 
 const Pocket = () => {
   return (
-    <Layout>
+    <PocketLayout>
       <TagsSection>
         <ol>
           <li>衣</li>
@@ -178,7 +184,7 @@ const Pocket = () => {
           <button>.</button>
         </div>
       </NumberPadSection>
-    </Layout>
+    </PocketLayout>
   );
 };
 

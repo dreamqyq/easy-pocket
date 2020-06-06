@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Nav from "./Nav";
+import Nav from './Nav';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -13,17 +13,18 @@ const Main = styled.main`
 `;
 
 type Props = {
-  children: React.ReactFragment
+  children: React.ReactFragment,
+  className?: string
 }
 const Layout = (props: Props) => {
   return (
     <Wrapper>
-      <Main>
-        { props.children }
+      <Main className={props.className}>
+        {props.children}
       </Main>
-      <Nav/>
+      <Nav />
     </Wrapper>
-  )
-}
+  );
+};
 
 export default Layout;
