@@ -13,10 +13,9 @@ const Main = styled.main`
 `;
 
 type Props = {
-  children: React.ReactFragment,
   className?: string
 }
-const Layout = (props: Props) => {
+const Layout: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <Main className={props.className}>

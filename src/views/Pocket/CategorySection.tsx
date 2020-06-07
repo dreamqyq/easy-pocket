@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
+import { Category } from './pocket';
 
 const Wrapper = styled.section`
   font-size: 24px;
@@ -29,7 +30,6 @@ const Wrapper = styled.section`
 
 const CategorySection: React.FC = () => {
   const categoryMap = { '-': '支出', '+': '收入' };
-  type Category = keyof typeof categoryMap;
   const [currentCategory, setCurrentCategory] = useState<Category>('-');
   const [categoryList] = useState<Array<Category>>(['-', '+']);
   return (

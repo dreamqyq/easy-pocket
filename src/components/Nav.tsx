@@ -28,7 +28,7 @@ const NavWrap = styled.nav`
   }
 `;
 
-const Nav = () => {
+const Nav: React.FC = () => {
   return (
     <NavWrap>
       <ul>

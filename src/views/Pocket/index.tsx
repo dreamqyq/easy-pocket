@@ -11,7 +11,7 @@ const PocketLayout = styled(Layout)`
   flex-direction: column;
 `;
 
-const Pocket = () => {
+const Pocket: React.FC = () => {
   return (
     <PocketLayout>
       <TagsSection />

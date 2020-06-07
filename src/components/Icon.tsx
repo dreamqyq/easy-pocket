@@ -10,7 +10,7 @@ try {
 type Props = {
   name: string
 }
-const Icon = (props: Props) => {
+const Icon: React.FC<Props> = (props) => {
   return (
     <svg
       className="icon"
@@ -20,7 +20,7 @@ const Icon = (props: Props) => {
         xlinkHref={`#${props.name}`}
       />
     </svg>
-  )
-}
+  );
+};
 
 export default Icon;
