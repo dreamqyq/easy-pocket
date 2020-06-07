@@ -13,54 +13,31 @@ const PocketLayout = styled(Layout)`
 `;
 
 const Pocket: React.FC = () => {
-  const [selectedData, setSelectedData] = useState({
+  const [selectedData, _setSelectedData] = useState({
     selectedTags: [] as string[],
     note: '',
     selectedCategory: '-' as Category,
     amount: 0
   });
+  const setSelectedData = (newValue: Partial<typeof selectedData>) => {
+    _setSelectedData({
+      ...selectedData,
+      ...newValue
+    });
+  };
   return (
     <PocketLayout>
-      {selectedData.selectedTags.join(',')}
-      <hr />
-      {selectedData.note}
-      <hr />
-      {selectedData.selectedCategory}
-      <hr />
-      {selectedData.amount}
       <TagsSection
-        value={selectedData.selectedTags} onChange={(selectedTags) => {
-        setSelectedData({
-          ...selectedData,
-          selectedTags
-        });
-      }} />
+        value={selectedData.selectedTags}
+        onChange={(selectedTags => setSelectedData({ selectedTags }))} />
       <NoteSection
         value={selectedData.note}
-        onChange={(note) => {
-          setSelectedData({
-            ...selectedData,
-            note
-          });
-        }}
-      />
+        onChange={(note => setSelectedData({ note }))} />
       <CategorySection
         value={selectedData.selectedCategory}
-        onChange={selectedCategory => {
-          setSelectedData({
-            ...selectedData,
-            selectedCategory
-          });
-        }}
-      />
+        onChange={(selectedCategory => setSelectedData({ selectedCategory }))} />
       <NumberPadSection
-        onChange={(amount) => {
-          setSelectedData({
-            ...selectedData,
-            amount
-          });
-        }}
-      />
+        onChange={(amount => setSelectedData({ amount }))} />
     </PocketLayout>
   );
 };
