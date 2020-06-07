@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import React, { useState } from 'react';
 
-const NumberPadSection = styled.section`
+const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   > div.output{
@@ -58,5 +59,74 @@ const NumberPadSection = styled.section`
     } 
   }
 `;
+
+const NumberPadSection: React.FC = () => {
+  const [output, _setOutput] = useState<string>('0');
+  const setOutput = (value: string) => {
+    const length = value.length;
+    if (length > 16) {
+      value = value.slice(0, 16);
+    } else if (length === 0) {
+      value = '0';
+    }
+    _setOutput(value);
+  };
+  const editOutput = (event: React.MouseEvent) => {
+    const text = (event.target as HTMLInputElement).textContent;
+    if (text === null) return;
+    switch (true) {
+      case (!isNaN(parseInt(text))):
+        if (output === '0') {
+          setOutput(text);
+        } else {
+          setOutput(output + text);
+        }
+        break;
+      case text === '.':
+        if (output.includes('.')) {
+          return;
+        } else {
+          setOutput(output + text);
+        }
+        break;
+      case text === '删除':
+        if (output.length > 1) {
+          setOutput(output.slice(0, -1));
+        } else if (output.length === 1) {
+          setOutput('');
+        }
+        break;
+      case text === '清空':
+        setOutput('');
+        break;
+      case text === 'OK':
+        console.log('ok');
+        break;
+      default:
+        break;
+    }
+  };
+  return (
+    <Wrapper>
+      <div className='output'>{output}</div>
+      <div className='pad clearfix' onClick={editOutput}>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>删除</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>清空</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button className='ok'>OK</button>
+        <button className='zero'>0</button>
+        <button>.</button>
+      </div>
+    </Wrapper>
+  );
+};
 
 export { NumberPadSection };
