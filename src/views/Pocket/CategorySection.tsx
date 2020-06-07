@@ -28,9 +28,14 @@ const Wrapper = styled.section`
   } 
 `;
 
-const CategorySection: React.FC = () => {
+type Props = {
+  value: Category,
+  onChange: (selectedCategory: Category) => void
+}
+
+const CategorySection: React.FC<Props> = (props) => {
   const categoryMap = { '-': '支出', '+': '收入' };
-  const [currentCategory, setCurrentCategory] = useState<Category>('-');
+  const currentCategory = props.value;
   const [categoryList] = useState<Array<Category>>(['-', '+']);
   return (
     <Wrapper>
@@ -39,7 +44,7 @@ const CategorySection: React.FC = () => {
           categoryList.map(category => (
             <li key={category}
                 className={category === currentCategory ? 'active' : ''}
-                onClick={() => setCurrentCategory(category)}
+                onClick={() => props.onChange(category)}
             >
               {categoryMap[category]}</li>
           ))

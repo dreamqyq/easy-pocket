@@ -3,7 +3,12 @@ import { Wrapper } from './Wrapper';
 import { calculateOutput } from './calculateOutput';
 import { InputString } from '../pocket';
 
-const NumberPadSection: React.FC = () => {
+
+type Props = {
+  onChange: (amount: number) => void;
+}
+
+const NumberPadSection: React.FC<Props> = (props) => {
   const [output, _setOutput] = useState<string>('0');
   const setOutput = (value: string) => {
     const length = value.length;
@@ -18,8 +23,7 @@ const NumberPadSection: React.FC = () => {
     const text = (event.target as HTMLInputElement).textContent;
     if (text === null) return;
     if (text === 'OK') {
-      // TODO
-      console.log('ok');
+      props.onChange(parseFloat(output));
     } else {
       setOutput(calculateOutput(text as InputString, output));
     }

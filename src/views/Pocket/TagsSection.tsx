@@ -33,10 +33,14 @@ const Wrapper = styled.section`
   }
 `;
 
-const TagsSection: React.FC = () => {
-  const [tagsList, setTagsList] = useState<Array<string>>(['衣', '食', '住', '行']);
-  const [selectedTagsList, setSelectedTagsList] = useState<Array<string>>([]);
+type Props = {
+  value: string[],
+  onChange: (selectedTags: string[]) => void
+}
 
+const TagsSection: React.FC<Props> = (props) => {
+  const [tagsList, setTagsList] = useState<Array<string>>(['衣', '食', '住', '行']);
+  const selectedTagsList = props.value;
   const isTagsHasCurrentTag = (currentTag: string | null, tags: Array<string>): boolean => {
     if (currentTag === null) return false;
     return tags.includes(currentTag);
@@ -53,9 +57,9 @@ const TagsSection: React.FC = () => {
 
   const onToggleSelectedTag = (selectedTag: string) => {
     if (isTagsHasCurrentTag(selectedTag, selectedTagsList)) {
-      setSelectedTagsList(selectedTagsList.filter(tag => tag !== selectedTag));
+      props.onChange(selectedTagsList.filter(tag => tag !== selectedTag));
     } else {
-      setSelectedTagsList([...selectedTagsList, selectedTag]);
+      props.onChange([...selectedTagsList, selectedTag]);
     }
   };
 
