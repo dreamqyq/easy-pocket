@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React from 'react';
+import { useTags } from "useTags";
 
 const Wrapper = styled.section`
   background: #fff;
@@ -39,7 +40,7 @@ type Props = {
 }
 
 const TagsSection: React.FC<Props> = (props) => {
-  const [tagsList, setTagsList] = useState<Array<string>>(['衣', '食', '住', '行']);
+  const { tags, setTags } = useTags();
   const selectedTagsList = props.value;
   const isTagsHasCurrentTag = (currentTag: string | null, tags: Array<string>): boolean => {
     if (currentTag === null) return false;
@@ -48,10 +49,10 @@ const TagsSection: React.FC<Props> = (props) => {
   const addNewTag = () => {
     const newTagName = window.prompt('请输入新标签的名字');
     if (newTagName === null || newTagName === '') return;
-    if (isTagsHasCurrentTag(newTagName, tagsList)) {
+    if (isTagsHasCurrentTag(newTagName, tags)) {
       window.alert('该标签名已存在，请不要重复添加！');
     } else {
-      setTagsList([...tagsList, newTagName]);
+      setTags([...tags, newTagName]);
     }
   };
 
@@ -67,7 +68,7 @@ const TagsSection: React.FC<Props> = (props) => {
     <Wrapper>
       <ol>
         {
-          tagsList.map(tag => (
+          tags.map(tag => (
             <li key={tag} className={isTagsHasCurrentTag(tag, selectedTagsList) ? 'selected' : ''}
                 onClick={() => onToggleSelectedTag(tag)}>{tag}</li>
           ))
