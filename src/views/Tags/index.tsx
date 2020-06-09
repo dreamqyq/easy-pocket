@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from 'components/Layout';
-import { useTags } from "useTags";
-import { Link } from "react-router-dom";
+import { useTags } from 'useTags';
+import { Link } from 'react-router-dom';
 
 const Tags: React.FC = () => {
   const { tags } = useTags();
@@ -10,9 +10,11 @@ const Tags: React.FC = () => {
       <ol>
         {
           tags.map(tag => (
-            <Link to={`/tags/${tag}`}>
-              <li key={tag}>{tag}</li>
-            </Link>
+            <li key={tag}>
+              <Link to={`/tags/${tag}`}>
+                {tag}
+              </Link>
+            </li>
           ))
         }
       </ol>
