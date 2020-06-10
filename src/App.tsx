@@ -25,7 +25,7 @@ function App() {
           <Route exact path="/tags">
             <Tags />
           </Route>
-          <Route exact path="/tags/:tagName">
+          <Route exact path="/tags/:tagId">
             <TagDetail />
           </Route>
           <Route exact path="/pocket">

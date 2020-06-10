@@ -1,11 +1,14 @@
 import React from 'react';
 import { useParams } from "react-router-dom"
+import { useTags } from 'useTags';
 
 type Params = {
-  tagName: string
+  tagId: string
 }
 const TagDetail: React.FC = () => {
-  const { tagName } = useParams<Params>();
+  const { tagId } = useParams<Params>();
+  const { findTagNameById } = useTags();
+  const tagName = findTagNameById(parseInt(tagId)).name
   return (
     <div>
       {tagName}
