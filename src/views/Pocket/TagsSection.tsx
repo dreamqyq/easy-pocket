@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { useTags } from "useTags";
 import { Tag } from 'types';
+import { createId } from 'utils/createId';
 
 const Wrapper = styled.section`
   background: #fff;
@@ -60,7 +61,7 @@ const TagsSection: React.FC<Props> = (props) => {
       window.alert('该标签名已存在，请不要重复添加！');
     } else {
       setTags([...tags, {
-        id: Math.random(),
+        id: createId(),
         name: newTagName
       }]);
     }
