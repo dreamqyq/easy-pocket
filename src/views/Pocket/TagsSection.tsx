@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { useTags } from "useTags";
+import { Tag } from 'types';
 
 const Wrapper = styled.section`
   background: #fff;
@@ -35,16 +36,22 @@ const Wrapper = styled.section`
 `;
 
 type Props = {
-  value: string[],
-  onChange: (selectedTags: string[]) => void
+  value: Array<Tag>,
+  onChange: (selectedTags: Array<Tag>) => void
 }
 
 const TagsSection: React.FC<Props> = (props) => {
   const { tags, setTags } = useTags();
   const selectedTagsList = props.value;
-  const isTagsHasCurrentTag = (currentTag: string | null, tags: Array<string>): boolean => {
+  const isTagsHasCurrentTag = (currentTag: string | null, tags: Array<Tag>): boolean => {
     if (currentTag === null) return false;
-    return tags.includes(currentTag);
+    let result = false;
+    tags.forEach(tag => {
+      if(currentTag === tag.name){
+        result = true;
+      }
+    })
+    return result;
   };
   const addNewTag = () => {
     const newTagName = window.prompt('请输入新标签的名字');
@@ -52,13 +59,16 @@ const TagsSection: React.FC<Props> = (props) => {
     if (isTagsHasCurrentTag(newTagName, tags)) {
       window.alert('该标签名已存在，请不要重复添加！');
     } else {
-      setTags([...tags, newTagName]);
+      setTags([...tags, {
+        id: Math.random(),
+        name: newTagName
+      }]);
     }
   };
 
-  const onToggleSelectedTag = (selectedTag: string) => {
-    if (isTagsHasCurrentTag(selectedTag, selectedTagsList)) {
-      props.onChange(selectedTagsList.filter(tag => tag !== selectedTag));
+  const onToggleSelectedTag = (selectedTag: Tag) => {
+    if (isTagsHasCurrentTag(selectedTag.name, selectedTagsList)) {
+      props.onChange(selectedTagsList.filter(tagObj => tagObj.id !== selectedTag.id));
     } else {
       props.onChange([...selectedTagsList, selectedTag]);
     }
@@ -69,8 +79,8 @@ const TagsSection: React.FC<Props> = (props) => {
       <ol>
         {
           tags.map(tag => (
-            <li key={tag} className={isTagsHasCurrentTag(tag, selectedTagsList) ? 'selected' : ''}
-                onClick={() => onToggleSelectedTag(tag)}>{tag}</li>
+            <li key={tag.id} className={isTagsHasCurrentTag(tag.name, selectedTagsList) ? 'selected' : ''}
+                onClick={() => onToggleSelectedTag(tag)}>{tag.name}</li>
           ))
         }
       </ol>

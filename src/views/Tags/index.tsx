@@ -46,10 +46,10 @@ const Tags: React.FC = () => {
       <TagList>
         {
           tags.map(tag => (
-            <li key={tag}>
-              <Link to={`/tags/${tag}`}>
+            <li key={tag.id}>
+              <Link to={`/tags/${tag.id}`}>
                 <span className="oneLine">
-                  {tag}
+                  {tag.name}
                 </span>
                 <Icon name="right" />
               </Link>

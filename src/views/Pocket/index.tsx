@@ -6,6 +6,7 @@ import { NoteSection } from './NoteSection';
 import { CategorySection } from './CategorySection';
 import { NumberPadSection } from './NumberPadSection';
 import { Category } from './pocket';
+import { Tag } from 'types';
 
 const PocketLayout = styled(Layout)`
   display: flex;
@@ -14,7 +15,7 @@ const PocketLayout = styled(Layout)`
 
 const Pocket: React.FC = () => {
   const [selectedData, _setSelectedData] = useState({
-    selectedTags: [] as string[],
+    selectedTags: [] as Tag[],
     note: '',
     selectedCategory: '-' as Category,
     amount: 0
