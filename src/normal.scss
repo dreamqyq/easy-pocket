@@ -49,4 +49,9 @@ body {
   display: block;
   clear: both;
 }
+.oneLine {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
