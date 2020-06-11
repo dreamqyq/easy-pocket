@@ -33,19 +33,19 @@ const Nav: React.FC = () => {
     <NavWrap>
       <ul>
         <li>
-          <NavLink to="/tags" exact replace activeClassName="active">
+          <NavLink to="/tags" replace activeClassName="active">
             <Icon name="tags" />
             &nbsp;标签
           </NavLink>
         </li>
         <li>
-          <NavLink to="/pocket" exact replace activeClassName='active'>
+          <NavLink to="/pocket" replace activeClassName='active'>
             <Icon name="pocket" />
             &nbsp;记账
           </NavLink>
         </li>
         <li>
-          <NavLink to="/statistics" exact replace activeClassName='active'>
+          <NavLink to="/statistics" replace activeClassName='active'>
             <Icon name="statistics" />
             &nbsp;统计
           </NavLink>
