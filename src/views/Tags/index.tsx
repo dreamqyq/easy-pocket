@@ -1,9 +1,11 @@
 import React from 'react';
-import Layout from 'components/Layout';
+import { Layout } from 'components/Layout';
 import { useTags } from 'hooks/useTags';
 import { Link } from 'react-router-dom';
-import Icon from 'components/Icon';
+import { Icon } from 'components/Icon';
 import styled from 'styled-components';
+import { Button } from 'components/Button';
+import { Center } from 'components/Center';
 
 const TagList = styled.ol`
   background: #fff;
@@ -22,21 +24,6 @@ const TagList = styled.ol`
       }
     }
   }
-`
-const Button = styled.button`
-  font-size: 18px;
-  border: none;
-  padding: 8px 12px;
-  background: #f60;
-  border-radius: 4px;
-  color: #fff;
-`
-
-const Center = styled.div`
-  margin-top: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
 
 const Tags: React.FC = () => {

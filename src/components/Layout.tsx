@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Nav from './Nav';
+import { Nav } from './Nav';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -26,4 +26,4 @@ const Layout: React.FC<Props> = (props) => {
   );
 };
 
-export default Layout;
+export { Layout };

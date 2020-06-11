@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import styled from 'styled-components';
-import Icon from 'components/Icon';
+import { Icon } from 'components/Icon';
 
 const NavWrap = styled.nav`
   background: #f5f5f5;
@@ -55,4 +55,4 @@ const Nav: React.FC = () => {
   );
 };
 
-export default Nav;
+export { Nav };
