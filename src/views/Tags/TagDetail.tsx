@@ -1,6 +1,6 @@
 import React from 'react';
-import { useParams } from "react-router-dom"
-import { useTags } from 'useTags';
+import { useParams } from 'react-router-dom';
+import { useTags } from 'hooks/useTags';
 
 type Params = {
   tagId: string
