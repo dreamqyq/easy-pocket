@@ -8,7 +8,7 @@ try {
 }
 
 type Props = {
-  name: string
+  name?: string
 }
 const Icon: React.FC<Props> = (props) => {
   return (
@@ -16,9 +16,9 @@ const Icon: React.FC<Props> = (props) => {
       className="icon"
       aria-hidden="true"
     >
-      <use
-        xlinkHref={`#${props.name}`}
-      />
+      {
+        props.name && <use xlinkHref={`#${props.name}`} />
+      }
     </svg>
   );
 };
