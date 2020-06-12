@@ -14,7 +14,7 @@ const TopBar = styled.header`
   line-height: 20px;
   padding: 14px;
   background: #fff;
-`
+`;
 
 type Params = {
   tagId: string
@@ -22,7 +22,7 @@ type Params = {
 const TagDetail: React.FC = () => {
   const { tagId } = useParams<Params>();
   const { findTagNameById } = useTags();
-  const tagName = findTagNameById(parseInt(tagId)).name
+  const tagName = findTagNameById(parseInt(tagId)).name;
   return (
     <Layout>
       <TopBar>
@@ -41,7 +41,7 @@ const TagDetail: React.FC = () => {
         </Center>
       </div>
     </Layout>
-  )
+  );
 };
 
 export default TagDetail;

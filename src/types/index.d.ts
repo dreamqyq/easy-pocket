@@ -5,4 +5,4 @@ type Tag = {
 
 export {
   Tag
-}
+};

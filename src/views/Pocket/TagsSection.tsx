@@ -48,10 +48,10 @@ const TagsSection: React.FC<Props> = (props) => {
     if (currentTag === null) return false;
     let result = false;
     tags.forEach(tag => {
-      if(currentTag === tag.name){
+      if (currentTag === tag.name) {
         result = true;
       }
-    })
+    });
     return result;
   };
   const addNewTag = () => {

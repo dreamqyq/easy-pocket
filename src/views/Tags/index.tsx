@@ -24,7 +24,7 @@ const TagList = styled.ol`
       }
     }
   }
-`
+`;
 
 const Tags: React.FC = () => {
   const { tags } = useTags();
