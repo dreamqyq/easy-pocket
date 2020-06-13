@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTags } from 'hooks/useTags';
 import { Layout } from 'components/Layout';
@@ -27,9 +27,13 @@ type Params = {
   tagId: string
 }
 const TagDetail: React.FC = () => {
-  const { tagId } = useParams<Params>();
-  const { findTagNameById } = useTags();
-  const tagName = findTagNameById(parseInt(tagId)).name;
+  const { tagId: tagIdString } = useParams<Params>();
+  const { findTagNameById, updateTag } = useTags();
+  const currentTag = findTagNameById(parseInt(tagIdString));
+
+  const onChangeHandle: ChangeEventHandler<HTMLInputElement> = (event) => {
+    updateTag({ id: currentTag.id, name: event.target.value });
+  };
   return (
     <Layout>
       <TopBar>
@@ -39,7 +43,11 @@ const TagDetail: React.FC = () => {
       </TopBar>
       <div>
         <InputWrapper>
-          <Input label="标签名" type="text" placeholder="请输入标签名" defaultValue={tagName} />
+          <Input
+            label="标签名" type="text" placeholder="请输入标签名"
+            value={currentTag.name}
+            onChange={onChangeHandle}
+          />
         </InputWrapper>
         <Center>
           <Button>删除标签</Button>
