@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { Tag } from 'types';
 import { createId } from 'utils/createId';
 import { useUpdate } from './useUpdate';
@@ -6,7 +6,7 @@ import { useUpdate } from './useUpdate';
 const useTags = () => {
   const [tags, setTags] = useState<Array<Tag>>([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
     if (localTags.length === 0) {
       localTags = [
