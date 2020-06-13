@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useTags } from 'hooks/useTags';
 import { Layout } from 'components/Layout';
 import { Icon } from 'components/Icon';
@@ -31,6 +31,7 @@ const TagDetail: React.FC = () => {
   const { tagId: tagIdString } = useParams<Params>();
   const { findTagNameById, updateTag, deleteTag } = useTags();
   const currentTag = findTagNameById(parseInt(tagIdString));
+  const history = useHistory();
 
   const onChangeHandle: ChangeEventHandler<HTMLInputElement> = (event) => {
     updateTag({ id: currentTag.id, name: event.target.value });
@@ -39,6 +40,10 @@ const TagDetail: React.FC = () => {
   const onClickHandle = () => {
     deleteTag(currentTag.id);
   };
+
+  const clickHandle = () => {
+    history.goBack();
+  }
 
   const tagContent = (currentTag: Tag) => (
     <div>
@@ -58,7 +63,7 @@ const TagDetail: React.FC = () => {
   return (
     <Layout>
       <TopBar>
-        <Icon name="left" />
+        <Icon name="left" onClick={clickHandle}/>
         <span>编辑标签</span>
         <Icon />
       </TopBar>
