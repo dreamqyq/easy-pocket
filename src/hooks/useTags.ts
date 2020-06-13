@@ -30,7 +30,13 @@ const useTags = () => {
     tagsClone.splice(index, 1, newTag);
     setTags(tagsClone);
   };
-  return { tags, setTags, findTagNameById, findTagIndexById, updateTag };
+  const deleteTag = (id: number): void => {
+    const index = findTagIndexById(id);
+    const tagsClone: Array<Tag> = JSON.parse(JSON.stringify(tags));
+    tagsClone.splice(index, 1);
+    setTags(tagsClone);
+  };
+  return { tags, setTags, findTagNameById, findTagIndexById, updateTag, deleteTag };
 };
 
 export { useTags };

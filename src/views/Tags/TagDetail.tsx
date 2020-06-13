@@ -7,6 +7,7 @@ import { Button } from 'components/Button';
 import { Center } from 'components/Center';
 import styled from 'styled-components';
 import { Input } from 'components/Input';
+import { Tag } from 'types';
 
 const TopBar = styled.header`
   display: flex;
@@ -28,12 +29,32 @@ type Params = {
 }
 const TagDetail: React.FC = () => {
   const { tagId: tagIdString } = useParams<Params>();
-  const { findTagNameById, updateTag } = useTags();
+  const { findTagNameById, updateTag, deleteTag } = useTags();
   const currentTag = findTagNameById(parseInt(tagIdString));
 
   const onChangeHandle: ChangeEventHandler<HTMLInputElement> = (event) => {
     updateTag({ id: currentTag.id, name: event.target.value });
   };
+
+  const onClickHandle = () => {
+    deleteTag(currentTag.id);
+  };
+
+  const tagContent = (currentTag: Tag) => (
+    <div>
+      <InputWrapper>
+        <Input
+          label="标签名" type="text" placeholder="请输入标签名"
+          value={currentTag.name}
+          onChange={onChangeHandle}
+        />
+      </InputWrapper>
+      <Center>
+        <Button onClick={onClickHandle}>删除标签</Button>
+      </Center>
+    </div>
+  );
+
   return (
     <Layout>
       <TopBar>
@@ -41,18 +62,9 @@ const TagDetail: React.FC = () => {
         <span>编辑标签</span>
         <Icon />
       </TopBar>
-      <div>
-        <InputWrapper>
-          <Input
-            label="标签名" type="text" placeholder="请输入标签名"
-            value={currentTag.name}
-            onChange={onChangeHandle}
-          />
-        </InputWrapper>
-        <Center>
-          <Button>删除标签</Button>
-        </Center>
-      </div>
+      {
+        currentTag ? tagContent(currentTag) : <Center>当前标签不存在</Center>
+      }
     </Layout>
   );
 };
