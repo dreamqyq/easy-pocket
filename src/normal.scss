@@ -30,8 +30,8 @@ a {
   user-select: none; /* CSS3属性 */
 }
 
-button {
-  font-family: inherit;
+button, input {
+  font: inherit;
 }
 
 body {
