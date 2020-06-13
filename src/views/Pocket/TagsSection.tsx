@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import React from 'react';
 import { useTags } from 'hooks/useTags';
 import { Tag } from 'types';
-import { createId } from 'utils/createId';
 
 const Wrapper = styled.section`
   background: #fff;
@@ -42,30 +41,8 @@ type Props = {
 }
 
 const TagsSection: React.FC<Props> = (props) => {
-  const { tags, setTags } = useTags();
+  const { tags, addTag, isTagsHasCurrentTag } = useTags();
   const selectedTagsList = props.value;
-  const isTagsHasCurrentTag = (currentTag: string | null, tags: Array<Tag>): boolean => {
-    if (currentTag === null) return false;
-    let result = false;
-    tags.forEach(tag => {
-      if (currentTag === tag.name) {
-        result = true;
-      }
-    });
-    return result;
-  };
-  const addNewTag = () => {
-    const newTagName = window.prompt('请输入新标签的名字');
-    if (newTagName === null || newTagName === '') return;
-    if (isTagsHasCurrentTag(newTagName, tags)) {
-      window.alert('该标签名已存在，请不要重复添加！');
-    } else {
-      setTags([...tags, {
-        id: createId(),
-        name: newTagName
-      }]);
-    }
-  };
 
   const onToggleSelectedTag = (selectedTag: Tag) => {
     if (isTagsHasCurrentTag(selectedTag.name, selectedTagsList)) {
@@ -85,7 +62,7 @@ const TagsSection: React.FC<Props> = (props) => {
           ))
         }
       </ol>
-      <button onClick={addNewTag}>新增标签</button>
+      <button onClick={addTag}>新增标签</button>
     </Wrapper>
   );
 };
