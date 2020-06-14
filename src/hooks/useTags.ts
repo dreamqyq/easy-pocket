@@ -47,7 +47,7 @@ const useTags = () => {
     return result;
   };
 
-  const findTagNameById = (id: number): Tag => {
+  const findTagById = (id: number): Tag => {
     return tags.filter(tag => tag.id === id)[0];
   };
 
@@ -61,7 +61,7 @@ const useTags = () => {
 
   return {
     tags, setTags,
-    findTagNameById, updateTag, deleteTag, addTag, isTagsHasCurrentTag
+    findTagById, updateTag, deleteTag, addTag, isTagsHasCurrentTag
   };
 };
 

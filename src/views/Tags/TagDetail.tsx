@@ -29,8 +29,8 @@ type Params = {
 }
 const TagDetail: React.FC = () => {
   const { tagId: tagIdString } = useParams<Params>();
-  const { findTagNameById, updateTag, deleteTag } = useTags();
-  const currentTag = findTagNameById(parseInt(tagIdString));
+  const { findTagById, updateTag, deleteTag } = useTags();
+  const currentTag = findTagById(parseInt(tagIdString));
   const history = useHistory();
 
   const onChangeHandle: ChangeEventHandler<HTMLInputElement> = (event) => {
