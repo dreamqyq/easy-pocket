@@ -20,12 +20,15 @@ const NumberPadSection: React.FC<Props> = (props) => {
     _setOutput(value);
   };
   const editOutput = (event: React.MouseEvent) => {
-    const text = (event.target as HTMLInputElement).textContent;
+    const text = (event.target as HTMLInputElement).textContent as InputString;
     if (text === null) return;
-    if (text === 'OK') {
+    if (text === '清空') {
+      setOutput('');
+      props.onChange(0);
+    } else if (text === '保存') {
       props.onChange(parseFloat(output));
     } else {
-      setOutput(calculateOutput(text as InputString, output));
+      setOutput(calculateOutput(text, output));
     }
   };
   return (
@@ -43,7 +46,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
         <button>7</button>
         <button>8</button>
         <button>9</button>
-        <button className='ok'>OK</button>
+        <button className='ok'>保存</button>
         <button className='zero'>0</button>
         <button>.</button>
       </div>
