@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
-import { Category } from './pocket';
+import { Category } from 'types/pocket';
 
 const Wrapper = styled.section`
   font-size: 24px;

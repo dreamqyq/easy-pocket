@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Wrapper } from './Wrapper';
 import { calculateOutput } from './calculateOutput';
-import { InputString } from '../pocket';
+import { InputString } from 'types/pocket';
 
 
 type Props = {

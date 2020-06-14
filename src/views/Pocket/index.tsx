@@ -5,7 +5,7 @@ import { TagsSection } from './TagsSection';
 import { NoteSection } from './NoteSection';
 import { CategorySection } from './CategorySection';
 import { NumberPadSection } from './NumberPadSection';
-import { Category } from './pocket';
+import { Category } from 'types/pocket';
 import { Tag } from 'types';
 
 const PocketLayout = styled(Layout)`

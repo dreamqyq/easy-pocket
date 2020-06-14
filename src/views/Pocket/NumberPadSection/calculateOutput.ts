@@ -1,4 +1,4 @@
-import { InputString } from '../pocket';
+import { InputString } from 'types/pocket';
 
 const calculateOutput = (text: InputString, originOutput: string): string => {
   switch (true) {
