@@ -7,24 +7,33 @@ import { CategorySection } from './CategorySection';
 import { NumberPadSection } from './NumberPadSection';
 import { Category } from 'types/pocket';
 import { Tag } from 'types';
+import { useRecords } from '../../hooks/useRecords';
 
 const PocketLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
 `;
 
+const initialFormData = {
+  selectedTags: [] as Tag[],
+  note: '',
+  selectedCategory: '-' as Category,
+  amount: 0
+};
+
 const Pocket: React.FC = () => {
-  const [selectedData, _setSelectedData] = useState({
-    selectedTags: [] as Tag[],
-    note: '',
-    selectedCategory: '-' as Category,
-    amount: 0
-  });
+  const [selectedData, _setSelectedData] = useState(initialFormData);
+  const { addRecord } = useRecords();
   const setSelectedData = (newValue: Partial<typeof selectedData>) => {
     _setSelectedData({
       ...selectedData,
       ...newValue
     });
+  };
+  const submit = () => {
+    addRecord(selectedData);
+    window.alert('保存成功！');
+    setSelectedData(initialFormData);
   };
   return (
     <PocketLayout>
@@ -38,7 +47,9 @@ const Pocket: React.FC = () => {
         value={selectedData.selectedCategory}
         onChange={(selectedCategory => setSelectedData({ selectedCategory }))} />
       <NumberPadSection
-        onChange={(amount => setSelectedData({ amount }))} />
+        onChange={(amount) => setSelectedData({ amount })}
+        onSave={submit}
+      />
     </PocketLayout>
   );
 };

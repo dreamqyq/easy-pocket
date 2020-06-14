@@ -6,27 +6,29 @@ import { InputString } from 'types/pocket';
 
 type Props = {
   onChange: (amount: number) => void;
+  onSave?: () => void;
 }
 
 const NumberPadSection: React.FC<Props> = (props) => {
   const [output, _setOutput] = useState<string>('0');
   const setOutput = (value: string) => {
     const length = value.length;
+    let newOutput: string;
     if (length > 16) {
-      value = value.slice(0, 16);
+      newOutput = value.slice(0, 16);
     } else if (length === 0) {
-      value = '0';
+      newOutput = '0';
+    } else {
+      newOutput = value;
     }
-    _setOutput(value);
+    _setOutput(newOutput);
+    props.onChange(parseFloat(newOutput));
   };
   const editOutput = (event: React.MouseEvent) => {
     const text = (event.target as HTMLInputElement).textContent as InputString;
     if (text === null) return;
-    if (text === '清空') {
-      setOutput('');
-      props.onChange(0);
-    } else if (text === '保存') {
-      props.onChange(parseFloat(output));
+    if (text === '保存') {
+      props.onSave && props.onSave();
     } else {
       setOutput(calculateOutput(text, output));
     }
