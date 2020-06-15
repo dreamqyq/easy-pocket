@@ -3,16 +3,20 @@ import styled from 'styled-components';
 import { Layout } from 'components/Layout';
 import { TagsSection } from './TagsSection';
 import { NoteSection } from './NoteSection';
-import { CategorySection } from './CategorySection';
+import { CategorySection } from 'components/CategorySection';
 import { NumberPadSection } from './NumberPadSection';
 import { Category } from 'types/pocket';
 import { Tag } from 'types';
-import { useRecords } from '../../hooks/useRecords';
+import { useRecords } from 'hooks/useRecords';
 
 const PocketLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
 `;
+
+const CategorySectionWrapper = styled.div`
+  background: #c4c4c4;
+`
 
 const initialFormData = {
   selectedTags: [] as Tag[],
@@ -47,9 +51,11 @@ const Pocket: React.FC = () => {
       <NoteSection
         value={selectedData.note}
         onChange={(note => setSelectedData({ note }))} />
-      <CategorySection
-        value={selectedData.selectedCategory}
-        onChange={(selectedCategory => setSelectedData({ selectedCategory }))} />
+      <CategorySectionWrapper>
+        <CategorySection
+          value={selectedData.selectedCategory}
+          onChange={(selectedCategory => setSelectedData({ selectedCategory }))} />
+      </CategorySectionWrapper>
       <NumberPadSection
         onChange={(amount) => setSelectedData({ amount })}
         onSave={(callback) => { submit(callback) }}

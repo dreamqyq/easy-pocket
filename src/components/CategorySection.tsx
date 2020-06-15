@@ -7,7 +7,6 @@ const Wrapper = styled.section`
   line-height: 72px;
   > ul{
     display: flex;
-    background: #c4c4c4;
     > li{
       width: 50%; 
       text-align: center;
