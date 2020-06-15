@@ -30,10 +30,14 @@ const Pocket: React.FC = () => {
       ...newValue
     });
   };
-  const submit = async () => {
-    await addRecord(selectedData);
-    window.alert('保存成功！');
-    setSelectedData(initialFormData);
+  const submit = async (callback: () => void) => {
+    await addRecord(selectedData).then(() => {
+      window.alert('保存成功！');
+      setSelectedData(initialFormData);
+      callback()
+    }).catch((error) => {
+      window.alert(error);
+    })
   };
   return (
     <PocketLayout>
@@ -48,7 +52,7 @@ const Pocket: React.FC = () => {
         onChange={(selectedCategory => setSelectedData({ selectedCategory }))} />
       <NumberPadSection
         onChange={(amount) => setSelectedData({ amount })}
-        onSave={submit}
+        onSave={(callback) => { submit(callback) }}
       />
     </PocketLayout>
   );

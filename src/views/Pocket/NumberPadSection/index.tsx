@@ -6,7 +6,7 @@ import { InputString } from 'types/pocket';
 
 type Props = {
   onChange: (amount: number) => void;
-  onSave?: () => void;
+  onSave?: (callback: ()=>void) => void;
 }
 
 const NumberPadSection: React.FC<Props> = (props) => {
@@ -28,7 +28,9 @@ const NumberPadSection: React.FC<Props> = (props) => {
     const text = (event.target as HTMLInputElement).textContent as InputString;
     if (text === null) return;
     if (text === '保存') {
-      props.onSave && props.onSave();
+      props.onSave && props.onSave(()=>{
+        _setOutput('0');
+      })
     } else {
       setOutput(calculateOutput(text, output));
     }

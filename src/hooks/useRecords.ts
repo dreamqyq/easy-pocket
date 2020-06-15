@@ -16,12 +16,10 @@ const useRecords = () => {
   const addRecord = (record: RecordItem) => {
     return new Promise((resolve, reject) => {
       if (record.amount <= 0) {
-        window.alert('金额要大于 0 哦！');
-        return reject("amountError");
+        return reject('金额要大于 0 哦！');
       }
       if (record.selectedTags.length === 0) {
-        window.alert('至少要选择一个标签哦！');
-        return reject("tagsError");
+        return reject('至少要选择一个标签哦！');
       }
       const newRecord: RecordItemWithTime = {
         ...record,
