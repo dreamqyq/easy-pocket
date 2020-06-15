@@ -14,11 +14,22 @@ const useRecords = () => {
   }, [records]);
 
   const addRecord = (record: RecordItem) => {
-    const newRecord: RecordItemWithTime = {
-      ...record,
-      createAt: (new Date()).toISOString()
-    };
-    setRecords([...records, newRecord]);
+    return new Promise((resolve, reject) => {
+      if (record.amount <= 0) {
+        window.alert('金额要大于 0 哦！');
+        return reject("amountError");
+      }
+      if (record.selectedTags.length === 0) {
+        window.alert('至少要选择一个标签哦！');
+        return reject("tagsError");
+      }
+      const newRecord: RecordItemWithTime = {
+        ...record,
+        createAt: (new Date()).toISOString()
+      };
+      setRecords([...records, newRecord]);
+      resolve();
+    })
   };
 
   return { records, setRecords, addRecord };

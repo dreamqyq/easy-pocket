@@ -30,8 +30,8 @@ const Pocket: React.FC = () => {
       ...newValue
     });
   };
-  const submit = () => {
-    addRecord(selectedData);
+  const submit = async () => {
+    await addRecord(selectedData);
     window.alert('保存成功！');
     setSelectedData(initialFormData);
   };
