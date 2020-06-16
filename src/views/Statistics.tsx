@@ -27,6 +27,7 @@ const Item = styled.div`
 const Statistics: React.FC = () => {
   const [category, setCategory] = useState<Category>('-');
   const { records } = useRecords();
+  const selectedRecords = records.filter(record => record.selectedCategory === category)
   return (
     <Layout>
       <CategorySectionWrapper>
@@ -37,11 +38,11 @@ const Statistics: React.FC = () => {
 
       <div>
         {
-          records.map(record => (
+          selectedRecords.map(record => (
             <Item key={record.createAt}>
               <div className="tags">{
                 record.selectedTags.map(tag => (
-                  <span>{tag.name}</span>
+                  <span key={tag.id}>{tag.name}</span>
                 ))
               }</div>
               {
