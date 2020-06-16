@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ReactNode } from 'react';
 import { Layout } from 'components/Layout';
 import { CategorySection } from 'components/CategorySection';
 import { Category, RecordItemWithTime } from 'types/pocket';
@@ -64,10 +64,12 @@ const Statistics: React.FC = () => {
               {
                 records.map(record => (
                   <Item key={record.createAt}>
-                    <div className="tags">{
-                      record.selectedTags.map(tag => (
-                        <span key={tag.id}>{tag.name}</span>
-                      ))
+                    <div className="tags oneLine">{
+                      record.selectedTags
+                        .map(tag => (<span key={tag.id}>{tag.name}</span>))
+                        .reduce((result, span, index, array) =>
+                          result.concat(
+                            index < array.length - 1 ? [span, '，'] : [span]), [] as Array<ReactNode>)
                     }</div>
                     {
                       record.note && <div className="note">{record.note}</div>
