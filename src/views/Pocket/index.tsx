@@ -16,7 +16,7 @@ const PocketLayout = styled(Layout)`
 
 const CategorySectionWrapper = styled.div`
   background: #c4c4c4;
-`
+`;
 
 const initialFormData = {
   selectedTags: [] as Tag[],
@@ -35,30 +35,37 @@ const Pocket: React.FC = () => {
     });
   };
   const submit = async (callback: () => void) => {
-    await addRecord(selectedData).then(() => {
-      window.alert('保存成功！');
-      setSelectedData(initialFormData);
-      callback()
-    }).catch((error) => {
-      window.alert(error);
-    })
+    await addRecord(selectedData)
+      .then(() => {
+        window.alert('保存成功！');
+        setSelectedData(initialFormData);
+        callback();
+      })
+      .catch(error => {
+        window.alert(error);
+      });
   };
   return (
-    <PocketLayout>
+    <PocketLayout scrollTop={9999}>
       <TagsSection
         value={selectedData.selectedTags}
-        onChange={(selectedTags => setSelectedData({ selectedTags }))} />
+        onChange={selectedTags => setSelectedData({ selectedTags })}
+      />
       <NoteSection
         value={selectedData.note}
-        onChange={(note => setSelectedData({ note }))} />
+        onChange={note => setSelectedData({ note })}
+      />
       <CategorySectionWrapper>
         <CategorySection
           value={selectedData.selectedCategory}
-          onChange={(selectedCategory => setSelectedData({ selectedCategory }))} />
+          onChange={selectedCategory => setSelectedData({ selectedCategory })}
+        />
       </CategorySectionWrapper>
       <NumberPadSection
-        onChange={(amount) => setSelectedData({ amount })}
-        onSave={(callback) => { submit(callback) }}
+        onChange={amount => setSelectedData({ amount })}
+        onSave={callback => {
+          submit(callback);
+        }}
       />
     </PocketLayout>
   );
