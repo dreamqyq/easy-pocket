@@ -5,21 +5,21 @@ import { Icon } from 'components/Icon';
 
 const NavWrap = styled.nav`
   background: #f5f5f5;
-  >ul{
-  box-shadow: 0 0 3px rgba(0,0,0,0.25);
-    display:flex;
-    >li{
+  > ul {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+    display: flex;
+    > li {
       width: 33.333%;
       text-align: center;
       line-height: 26px;
-      a{
+      a {
         padding: 14px 0;
         display: inline-block;
         width: 100%;
         font-size: 20px;
-        &.active{
+        &.active {
           color: red;
-          svg{
+          svg {
             fill: red;
           }
         }
@@ -39,13 +39,13 @@ const Nav: React.FC = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/pocket" replace activeClassName='active'>
+          <NavLink to="/pocket" replace activeClassName="active">
             <Icon name="pocket" />
             &nbsp;记账
           </NavLink>
         </li>
         <li>
-          <NavLink to="/statistics" replace activeClassName='active'>
+          <NavLink to="/statistics" replace activeClassName="active">
             <Icon name="statistics" />
             &nbsp;统计
           </NavLink>

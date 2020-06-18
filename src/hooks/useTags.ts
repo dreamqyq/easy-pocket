@@ -29,14 +29,20 @@ const useTags = () => {
     if (isTagsHasCurrentTag(newTagName, tags)) {
       window.alert('该标签名已存在，请不要重复添加！');
     } else {
-      setTags([...tags, {
-        id: createId(),
-        name: newTagName
-      }]);
+      setTags([
+        ...tags,
+        {
+          id: createId(),
+          name: newTagName
+        }
+      ]);
     }
   };
 
-  const isTagsHasCurrentTag = (currentTag: string | null, tags: Array<Tag>): boolean => {
+  const isTagsHasCurrentTag = (
+    currentTag: string | null,
+    tags: Array<Tag>
+  ): boolean => {
     if (currentTag === null) return false;
     let result = false;
     tags.forEach(tag => {
@@ -52,7 +58,7 @@ const useTags = () => {
   };
 
   const updateTag = (newTag: Tag): void => {
-    setTags(tags.map(tag => tag.id === newTag.id ? newTag : tag));
+    setTags(tags.map(tag => (tag.id === newTag.id ? newTag : tag)));
   };
 
   const deleteTag = (id: number): void => {
@@ -60,8 +66,13 @@ const useTags = () => {
   };
 
   return {
-    tags, setTags,
-    findTagById, updateTag, deleteTag, addTag, isTagsHasCurrentTag
+    tags,
+    setTags,
+    findTagById,
+    updateTag,
+    deleteTag,
+    addTag,
+    isTagsHasCurrentTag
   };
 };
 

@@ -25,15 +25,15 @@ const InputWrapper = styled.div`
 `;
 
 type Params = {
-  tagId: string
-}
+  tagId: string;
+};
 const TagDetail: React.FC = () => {
   const { tagId: tagIdString } = useParams<Params>();
   const { findTagById, updateTag, deleteTag } = useTags();
   const currentTag = findTagById(parseInt(tagIdString));
   const history = useHistory();
 
-  const onChangeHandle: ChangeEventHandler<HTMLInputElement> = (event) => {
+  const onChangeHandle: ChangeEventHandler<HTMLInputElement> = event => {
     updateTag({ id: currentTag.id, name: event.target.value });
   };
 
@@ -43,13 +43,15 @@ const TagDetail: React.FC = () => {
 
   const clickHandle = () => {
     history.goBack();
-  }
+  };
 
   const tagContent = (currentTag: Tag) => (
     <div>
       <InputWrapper>
         <Input
-          label="标签名" type="text" placeholder="请输入标签名"
+          label="标签名"
+          type="text"
+          placeholder="请输入标签名"
           value={currentTag.name}
           onChange={onChangeHandle}
         />
@@ -63,16 +65,13 @@ const TagDetail: React.FC = () => {
   return (
     <Layout>
       <TopBar>
-        <Icon name="left" onClick={clickHandle}/>
+        <Icon name="left" onClick={clickHandle} />
         <span>编辑标签</span>
         <Icon />
       </TopBar>
-      {
-        currentTag ? tagContent(currentTag) : <Center>当前标签不存在</Center>
-      }
+      {currentTag ? tagContent(currentTag) : <Center>当前标签不存在</Center>}
     </Layout>
   );
 };
 
 export default TagDetail;
-

@@ -11,21 +11,21 @@ const Wrapper = styled.section`
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  > ol{
+  > ol {
     margin-left: -12px;
-    > li{
-      background: #D9D9D9;
+    > li {
+      background: #d9d9d9;
       border-radius: 18px;
       display: inline-block;
       padding: 3px 18px;
       font-size: 14px;
       margin: 8px 12px;
-      &.selected{
+      &.selected {
         background: #f60;
       }
     }
   }
-  > button{
+  > button {
     background: none;
     border: none;
     border-bottom: 1px solid #333;
@@ -36,17 +36,19 @@ const Wrapper = styled.section`
 `;
 
 type Props = {
-  value: Array<Tag>,
-  onChange: (selectedTags: Array<Tag>) => void
-}
+  value: Array<Tag>;
+  onChange: (selectedTags: Array<Tag>) => void;
+};
 
-const TagsSection: React.FC<Props> = (props) => {
+const TagsSection: React.FC<Props> = props => {
   const { tags, addTag, isTagsHasCurrentTag } = useTags();
   const selectedTagsList = props.value;
 
   const onToggleSelectedTag = (selectedTag: Tag) => {
     if (isTagsHasCurrentTag(selectedTag.name, selectedTagsList)) {
-      props.onChange(selectedTagsList.filter(tagObj => tagObj.id !== selectedTag.id));
+      props.onChange(
+        selectedTagsList.filter(tagObj => tagObj.id !== selectedTag.id)
+      );
     } else {
       props.onChange([...selectedTagsList, selectedTag]);
     }
@@ -55,12 +57,17 @@ const TagsSection: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <ol>
-        {
-          tags.map(tag => (
-            <li key={tag.id} className={isTagsHasCurrentTag(tag.name, selectedTagsList) ? 'selected' : ''}
-                onClick={() => onToggleSelectedTag(tag)}>{tag.name}</li>
-          ))
-        }
+        {tags.map(tag => (
+          <li
+            key={tag.id}
+            className={
+              isTagsHasCurrentTag(tag.name, selectedTagsList) ? 'selected' : ''
+            }
+            onClick={() => onToggleSelectedTag(tag)}
+          >
+            {tag.name}
+          </li>
+        ))}
       </ol>
       <button onClick={addTag}>新增标签</button>
     </Wrapper>

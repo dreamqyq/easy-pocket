@@ -2,7 +2,7 @@ import { InputString } from 'types/pocket';
 
 const calculateOutput = (text: InputString, originOutput: string): string => {
   switch (true) {
-    case (!isNaN(parseInt(text))):
+    case !isNaN(parseInt(text)):
       if (originOutput === '0') {
         return text;
       } else {

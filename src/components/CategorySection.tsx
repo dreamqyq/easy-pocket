@@ -5,14 +5,14 @@ import { Category } from 'types/pocket';
 const Wrapper = styled.section`
   font-size: 24px;
   line-height: 72px;
-  > ul{
+  > ul {
     display: flex;
-    > li{
-      width: 50%; 
+    > li {
+      width: 50%;
       text-align: center;
-      &.active{
+      &.active {
         position: relative;
-        &::after{
+        &::after {
           content: '';
           height: 3px;
           width: 100%;
@@ -24,30 +24,30 @@ const Wrapper = styled.section`
         }
       }
     }
-  } 
+  }
 `;
 
 type Props = {
-  value: Category,
-  onChange: (selectedCategory: Category) => void
-}
+  value: Category;
+  onChange: (selectedCategory: Category) => void;
+};
 
-const CategorySection: React.FC<Props> = (props) => {
+const CategorySection: React.FC<Props> = props => {
   const categoryMap = { '-': '支出', '+': '收入' };
   const currentCategory = props.value;
   const [categoryList] = useState<Array<Category>>(['-', '+']);
   return (
     <Wrapper>
       <ul>
-        {
-          categoryList.map(category => (
-            <li key={category}
-                className={category === currentCategory ? 'active' : ''}
-                onClick={() => props.onChange(category)}
-            >
-              {categoryMap[category]}</li>
-          ))
-        }
+        {categoryList.map(category => (
+          <li
+            key={category}
+            className={category === currentCategory ? 'active' : ''}
+            onClick={() => props.onChange(category)}
+          >
+            {categoryMap[category]}
+          </li>
+        ))}
       </ul>
     </Wrapper>
   );

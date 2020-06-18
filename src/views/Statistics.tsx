@@ -8,7 +8,7 @@ import day from 'dayjs';
 
 const CategorySectionWrapper = styled.div`
   background: #fff;
-`
+`;
 
 const Item = styled.div`
   display: flex;
@@ -17,23 +17,25 @@ const Item = styled.div`
   font-size: 18px;
   line-height: 20px;
   padding: 10px 16px;
-  > .note{
+  > .note {
     margin-right: auto;
     margin-left: 16px;
     color: #999;
   }
-`
+`;
 
 const Header = styled.h3`
   font-size: 18px;
   line-height: 20px;
   padding: 10px 16px;
-`
+`;
 
 const Statistics: React.FC = () => {
   const [category, setCategory] = useState<Category>('-');
   const { records } = useRecords();
-  const selectedRecords = records.filter(record => record.selectedCategory === category);
+  const selectedRecords = records.filter(
+    record => record.selectedCategory === category
+  );
   const recordsWithDateObj: { [K: string]: Array<RecordItemWithTime> } = {};
   selectedRecords.forEach(record => {
     const date = day(record.createAt).format('YYYY年MM月DD日');
@@ -41,47 +43,50 @@ const Statistics: React.FC = () => {
       recordsWithDateObj[date] = [];
     }
     recordsWithDateObj[date].push(record);
-  })
-  const dateAndRecordsSortByDate = Object.entries(recordsWithDateObj).sort((a, b) => {
-    if (a[0] === b[0]) return 0;
-    if (a[0] < b[0]) return 1;
-    if (a[0] > b[0]) return -1;
-    return 0;
-  })
+  });
+  const dateAndRecordsSortByDate = Object.entries(recordsWithDateObj).sort(
+    (a, b) => {
+      if (a[0] === b[0]) return 0;
+      if (a[0] < b[0]) return 1;
+      if (a[0] > b[0]) return -1;
+      return 0;
+    }
+  );
 
   return (
     <Layout>
       <CategorySectionWrapper>
         <CategorySection
           value={category}
-          onChange={(category) => { setCategory(category) }} />
+          onChange={category => {
+            setCategory(category);
+          }}
+        />
       </CategorySectionWrapper>
-      {
-        dateAndRecordsSortByDate.map(([date, records]) => (
-          <div key={date}>
-            <Header>{date}</Header>
-            <div>
-              {
-                records.map(record => (
-                  <Item key={record.createAt}>
-                    <div className="tags oneLine">{
-                      record.selectedTags
-                        .map(tag => (<span key={tag.id}>{tag.name}</span>))
-                        .reduce((result, span, index, array) =>
-                          result.concat(
-                            index < array.length - 1 ? [span, '，'] : [span]), [] as Array<ReactNode>)
-                    }</div>
-                    {
-                      record.note && <div className="note">{record.note}</div>
-                    }
-                    <div className="amount">￥{record.amount}</div>
-                  </Item>
-                ))
-              }
-            </div>
+      {dateAndRecordsSortByDate.map(([date, records]) => (
+        <div key={date}>
+          <Header>{date}</Header>
+          <div>
+            {records.map(record => (
+              <Item key={record.createAt}>
+                <div className="tags oneLine">
+                  {record.selectedTags
+                    .map(tag => <span key={tag.id}>{tag.name}</span>)
+                    .reduce(
+                      (result, span, index, array) =>
+                        result.concat(
+                          index < array.length - 1 ? [span, '，'] : [span]
+                        ),
+                      [] as Array<ReactNode>
+                    )}
+                </div>
+                {record.note && <div className="note">{record.note}</div>}
+                <div className="amount">￥{record.amount}</div>
+              </Item>
+            ))}
           </div>
-        ))
-      }
+        </div>
+      ))}
     </Layout>
   );
 };

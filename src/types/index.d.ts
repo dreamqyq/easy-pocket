@@ -1,8 +1,6 @@
 type Tag = {
-  id: number,
-  name: string
-}
-
-export {
-  Tag
+  id: number;
+  name: string;
 };
+
+export { Tag };

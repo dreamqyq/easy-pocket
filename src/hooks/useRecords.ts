@@ -23,11 +23,11 @@ const useRecords = () => {
       }
       const newRecord: RecordItemWithTime = {
         ...record,
-        createAt: (new Date()).toISOString()
+        createAt: new Date().toISOString()
       };
       setRecords([...records, newRecord]);
       resolve();
-    })
+    });
   };
 
   return { records, setRecords, addRecord };
