@@ -2,7 +2,12 @@
 基于 React 技术栈实现的简易记账项目
 
 ## 项目运行命令
-### `yarn start`
-### `yarn test`
-### `yarn build`
-### `yarn eject`
+
+### 启动 
+`yarn start`
+### 测试 
+`yarn test`
+### 构建
+`yarn build`
+### 部署
+`yarn deploy`
