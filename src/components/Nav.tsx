@@ -33,6 +33,11 @@ const Nav: React.FC = () => {
     <NavWrap>
       <ul>
         <li>
+          <NavLink to="/statistics" replace activeClassName="active">
+            <Icon name="plus" />
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/tags" replace activeClassName="active">
             <Icon name="tags" />
             &nbsp;标签
@@ -45,7 +50,7 @@ const Nav: React.FC = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/statistics" replace activeClassName="active">
+          <NavLink to="/chart" replace activeClassName="active">
             <Icon name="statistics" />
             &nbsp;统计
           </NavLink>

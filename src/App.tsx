@@ -6,6 +6,7 @@ import Pocket from 'views/Pocket';
 import Statistics from 'views/Statistics';
 import NoMatch from 'views/NoMatch';
 import TagDetail from 'views/Tags/TagDetail';
+import Chart from 'views/Chart';
 import styled from 'styled-components';
 import { Emoji } from './components/Emoji';
 
@@ -72,6 +73,9 @@ function App() {
           </Route>
           <Route exact path="/statistics">
             <Statistics />
+          </Route>
+          <Route exact path="/chart">
+            <Chart />
           </Route>
           <Redirect exact from="/" to="/tags" />
           <Route path="*">
