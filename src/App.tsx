@@ -77,7 +77,7 @@ function App() {
           <Route exact path="/chart">
             <Chart />
           </Route>
-          <Redirect exact from="/" to="/tags" />
+          <Redirect exact from="/" to="/statistics" />
           <Route path="*">
             <NoMatch />
           </Route>
