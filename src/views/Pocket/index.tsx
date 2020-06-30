@@ -8,6 +8,7 @@ import { NumberPadSection } from './NumberPadSection';
 import { Category } from 'types/pocket';
 import { Tag } from 'types';
 import { useRecords } from 'hooks/useRecords';
+import { TopBar } from 'components/TopBar';
 
 const PocketLayout = styled(Layout)`
   display: flex;
@@ -46,7 +47,8 @@ const Pocket: React.FC = () => {
       });
   };
   return (
-    <PocketLayout scrollTop={9999}>
+    <PocketLayout scrollTop={9999} showBottomBar={false}>
+      <TopBar title="记一笔"/>
       <TagsSection
         value={selectedData.selectedTags}
         onChange={selectedTags => setSelectedData({ selectedTags })}
@@ -63,8 +65,8 @@ const Pocket: React.FC = () => {
       </CategorySectionWrapper>
       <NumberPadSection
         onChange={amount => setSelectedData({ amount })}
-        onSave={callback => {
-          submit(callback);
+        onSave={async callback => {
+          await submit(callback);
         }}
       />
     </PocketLayout>

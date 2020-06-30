@@ -10,6 +10,7 @@ const TopBarWrap = styled.header`
   line-height: 20px;
   padding: 14px;
   background: #fff;
+  margin-bottom: 8px;
 `;
 
 type Props = {

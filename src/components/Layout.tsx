@@ -15,6 +15,7 @@ const Main = styled.main`
 type Props = {
   className?: string;
   scrollTop?: number;
+  showBottomBar?: boolean;
 };
 const Layout: React.FC<Props> = props => {
   const mainRef = useRef<HTMLDivElement>(null);
@@ -29,13 +30,14 @@ const Layout: React.FC<Props> = props => {
       <Main ref={mainRef} className={props.className}>
         {props.children}
       </Main>
-      <Nav />
+      {props.showBottomBar ? <Nav /> : null}
     </Wrapper>
   );
 };
 
 Layout.defaultProps = {
-  scrollTop: 0
+  scrollTop: 0,
+  showBottomBar: true
 };
 
 export { Layout };

@@ -12,7 +12,6 @@ import { TopBar } from 'components/TopBar';
 const InputWrapper = styled.div`
   background: #fff;
   padding: 0 16px;
-  margin-top: 8px;
 `;
 
 type Params = {
