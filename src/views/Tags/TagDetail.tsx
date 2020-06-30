@@ -1,22 +1,13 @@
 import React, { ChangeEventHandler } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useTags } from 'hooks/useTags';
 import { Layout } from 'components/Layout';
-import { Icon } from 'components/Icon';
 import { Button } from 'components/Button';
 import { Center } from 'components/Center';
 import styled from 'styled-components';
 import { Input } from 'components/Input';
 import { Tag } from 'types';
-
-const TopBar = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  line-height: 20px;
-  padding: 14px;
-  background: #fff;
-`;
+import { TopBar } from 'components/TopBar';
 
 const InputWrapper = styled.div`
   background: #fff;
@@ -31,7 +22,6 @@ const TagDetail: React.FC = () => {
   const { tagId: tagIdString } = useParams<Params>();
   const { findTagById, updateTag, deleteTag } = useTags();
   const currentTag = findTagById(parseInt(tagIdString));
-  const history = useHistory();
 
   const onChangeHandle: ChangeEventHandler<HTMLInputElement> = event => {
     updateTag({ id: currentTag.id, name: event.target.value });
@@ -39,10 +29,6 @@ const TagDetail: React.FC = () => {
 
   const onClickHandle = () => {
     deleteTag(currentTag.id);
-  };
-
-  const clickHandle = () => {
-    history.goBack();
   };
 
   const tagContent = (currentTag: Tag) => (
@@ -64,11 +50,7 @@ const TagDetail: React.FC = () => {
 
   return (
     <Layout>
-      <TopBar>
-        <Icon name="left" onClick={clickHandle} />
-        <span>编辑标签</span>
-        <Icon />
-      </TopBar>
+      <TopBar title="编辑标签" />
       {currentTag ? tagContent(currentTag) : <Center>当前标签不存在</Center>}
     </Layout>
   );

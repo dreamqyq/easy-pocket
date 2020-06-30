@@ -53,7 +53,7 @@ const Nav: React.FC = () => {
       <ul>
         <li>
           <NavLink to="/tags" replace activeClassName="active">
-            <Icon name="tags"/>
+            <Icon name="tags" />
           </NavLink>
         </li>
         <li>
@@ -62,12 +62,12 @@ const Nav: React.FC = () => {
                   className='plus'
                   onClick={(event) => toPocketPage(event)}
             />
-            <Icon name="pocket" className='pocket'/>
+            <Icon name="pocket" className='pocket' />
           </NavLink>
         </li>
         <li>
           <NavLink to="/chart" replace activeClassName="active">
-            <Icon name="statistics"/>
+            <Icon name="statistics" />
           </NavLink>
         </li>
       </ul>
