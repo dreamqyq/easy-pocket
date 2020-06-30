@@ -10,21 +10,39 @@ const NavWrap = styled.nav`
     display: flex;
     > li {
       width: 33.333%;
-      text-align: center;
       line-height: 26px;
       a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         font-size: 26px;
-        padding: 14px 0;
-        display: inline-block;
+        padding: 5px 0;
         width: 100%;
-        > .icon.plus{
+        height: 100%;
+        > span {
+          font-size: 14px; 
+        }
+        > .icon.plus {
           display: none;
         }
-        > .icon.pocket{
+        > .icon.pocket {
           display: inline-block;
         }
+        > span.pocket {
+          display: inline-block;
+        }
+        > span.record {
+          display: none;
+        }
         &.active {
-          color: red;
+          color: #f60;
+          > span.pocket {
+            display: none;
+          }
+          > span.record {
+            display: inline-block;
+          }
           > .icon.plus {
             display: inline-block;
           }
@@ -32,7 +50,7 @@ const NavWrap = styled.nav`
             display: none;
           }
           svg {
-            fill: red;
+            fill: #f60;
           }
         }
       }
@@ -54,6 +72,7 @@ const Nav: React.FC = () => {
         <li>
           <NavLink to="/tags" replace activeClassName="active">
             <Icon name="tags" />
+            <span>标签</span>
           </NavLink>
         </li>
         <li>
@@ -63,11 +82,14 @@ const Nav: React.FC = () => {
                   onClick={(event) => toPocketPage(event)}
             />
             <Icon name="pocket" className='pocket' />
+            <span className='pocket'>账单</span>
+            <span className='record'>记一笔</span>
           </NavLink>
         </li>
         <li>
           <NavLink to="/chart" replace activeClassName="active">
             <Icon name="statistics" />
+            <span>报表</span>
           </NavLink>
         </li>
       </ul>
