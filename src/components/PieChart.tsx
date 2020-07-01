@@ -11,8 +11,8 @@ const PieChart: React.FC<Props> = (props) => {
 
   useEffect(() => {
     const width = document.documentElement.clientWidth;
-    container.current.style.width = `${width - 40}px`;
-    container.current.style.height = `${(width - 40) * 1.2}px`;
+    container.current.style.width = `${width - 20}px`;
+    container.current.style.height = `${(width - 20) * 1.2}px`;
     chart.current = init(container.current, 'light');
   }, []);
 

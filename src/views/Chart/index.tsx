@@ -18,26 +18,28 @@ const itemStyle = {
 const Chart: React.FC = () => {
   const [options] = useState<EChartOption>({
       title: {
-        text: '饼图纹理',
+        text: '账单统计',
         textStyle: {
           color: '#235894'
         }
       },
-      tooltip: {},
+      tooltip: {
+        show: true
+      },
       series: [{
         name: 'pie',
         type: 'pie',
         selectedMode: 'single',
-        selectedOffset: 30,
+        selectedOffset: 20,
         clockwise: true,
         label: {
-          fontSize: 18,
-          color: '#235894'
+          fontSize: 14,
+          fontWeight: 'bold',
+          color: '#1a426d',
+          position: 'inside'
         },
         labelLine: {
-          lineStyle: {
-            color: '#235894'
-          }
+          show: false
         },
         data: [
           { value: 335, name: '直接访问' },
