@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from 'react';
 import { Tag } from 'types';
 import { createId } from 'utils/createId';
 import { useUpdate } from './useUpdate';
+import { defaultTags } from 'data/defaultTags';
 
 const useTags = () => {
   const [tags, setTags] = useState<Array<Tag>>([]);
@@ -9,12 +10,7 @@ const useTags = () => {
   useLayoutEffect(() => {
     let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
     if (localTags.length === 0) {
-      localTags = [
-        { id: createId(), name: '衣' },
-        { id: createId(), name: '食' },
-        { id: createId(), name: '住' },
-        { id: createId(), name: '行' }
-      ];
+      localTags = defaultTags;
     }
     setTags(localTags);
   }, []);
@@ -57,6 +53,10 @@ const useTags = () => {
     return tags.filter(tag => tag.id === id)[0];
   };
 
+  const findTagByName = (name: string): Tag => {
+    return tags.filter(tag => tag.name === name)[0];
+  };
+
   const updateTag = (newTag: Tag): void => {
     setTags(tags.map(tag => (tag.id === newTag.id ? newTag : tag)));
   };
@@ -69,6 +69,7 @@ const useTags = () => {
     tags,
     setTags,
     findTagById,
+    findTagByName,
     updateTag,
     deleteTag,
     addTag,
