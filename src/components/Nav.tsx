@@ -76,7 +76,7 @@ const Nav: React.FC = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/statistics" replace activeClassName="active">
+          <NavLink to="/bill" replace activeClassName="active">
             <Icon name="plus"
                   className='plus'
                   onClick={(event) => toPocketPage(event)}
@@ -88,7 +88,7 @@ const Nav: React.FC = () => {
         </li>
         <li>
           <NavLink to="/chart" replace activeClassName="active">
-            <Icon name="statistics" />
+            <Icon name="chart" />
             <span>报表</span>
           </NavLink>
         </li>

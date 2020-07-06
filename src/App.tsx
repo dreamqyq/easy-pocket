@@ -3,7 +3,7 @@ import './normal.scss';
 import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Tags from 'views/Tags';
 import Pocket from 'views/Pocket';
-import Statistics from 'views/Statistics';
+import Bill from 'views/Bill';
 import NoMatch from 'views/NoMatch';
 import TagDetail from 'views/Tags/TagDetail';
 import Chart from 'views/Chart';
@@ -71,13 +71,13 @@ function App() {
           <Route exact path="/pocket">
             <Pocket />
           </Route>
-          <Route exact path="/statistics">
-            <Statistics />
+          <Route exact path="/bill">
+            <Bill />
           </Route>
           <Route exact path="/chart">
             <Chart />
           </Route>
-          <Redirect exact from="/" to="/statistics" />
+          <Redirect exact from="/" to="/bill" />
           <Route path="*">
             <NoMatch />
           </Route>

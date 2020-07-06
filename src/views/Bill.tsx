@@ -30,7 +30,7 @@ const Header = styled.h3`
   padding: 10px 16px;
 `;
 
-const Statistics: React.FC = () => {
+const Bill: React.FC = () => {
   const [category, setCategory] = useState<Category>('-');
   const { records } = useRecords();
   const selectedRecords = records.filter(
@@ -91,4 +91,4 @@ const Statistics: React.FC = () => {
   );
 };
 
-export default Statistics;
+export default Bill;
