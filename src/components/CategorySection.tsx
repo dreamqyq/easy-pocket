@@ -33,8 +33,8 @@ const Wrapper = styled.section<WrapProps>`
 
 type Props = {
   value: Category;
-  background?: string;
   onChange: (selectedCategory: Category) => void;
+  background?: string;
 };
 
 const CategorySection: React.FC<Props> = props => {

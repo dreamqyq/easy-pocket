@@ -3,6 +3,8 @@ import { Layout } from 'components/Layout';
 import { PieChart } from 'components/PieChart';
 import { EChartOption } from 'echarts';
 import { piePatternImg } from './pieChartPattern';
+import { CategorySection } from 'components/CategorySection';
+import { Category } from 'types/pocket';
 
 const itemStyle = {
   normal: {
@@ -16,9 +18,12 @@ const itemStyle = {
   }
 };
 const Chart: React.FC = () => {
+  const [category, setCategory] = useState<Category>('-');
   const [options] = useState<EChartOption>({
       title: {
         text: '账单统计',
+        top: 20,
+        left: 20,
         textStyle: {
           color: '#235894'
         }
@@ -54,6 +59,12 @@ const Chart: React.FC = () => {
   );
   return (
     <Layout>
+      <CategorySection
+        value={category}
+        onChange={category => {
+          setCategory(category);
+        }}
+      />
       <PieChart options={options} />
     </Layout>
   );
