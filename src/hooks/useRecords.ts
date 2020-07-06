@@ -2,16 +2,14 @@ import { useEffect, useState } from 'react';
 import { RecordItem, RecordItemWithTime } from 'types/pocket';
 import { useUpdate } from './useUpdate';
 import { defaultRecords } from 'data/defaultRecords';
-import { useTags } from './useTags';
 
 const useRecords = () => {
-  const { findTagByName } = useTags();
   const [records, setRecords] = useState<RecordItemWithTime[]>([]);
 
   useEffect(() => {
     const initialRecords = JSON.parse(window.localStorage.getItem('records') || '[]');
     if (initialRecords.length === 0) {
-      setRecords(defaultRecords(findTagByName));
+      setRecords(defaultRecords());
     } else {
       setRecords(initialRecords);
     }
