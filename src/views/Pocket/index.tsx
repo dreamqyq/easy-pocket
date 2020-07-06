@@ -15,10 +15,6 @@ const PocketLayout = styled(Layout)`
   flex-direction: column;
 `;
 
-const CategorySectionWrapper = styled.div`
-  background: #c4c4c4;
-`;
-
 const initialFormData = {
   selectedTags: [] as Tag[],
   note: '',
@@ -48,7 +44,7 @@ const Pocket: React.FC = () => {
   };
   return (
     <PocketLayout scrollTop={9999} showBottomBar={false}>
-      <TopBar title="记一笔"/>
+      <TopBar title="记一笔" />
       <TagsSection
         value={selectedData.selectedTags}
         onChange={selectedTags => setSelectedData({ selectedTags })}
@@ -57,12 +53,11 @@ const Pocket: React.FC = () => {
         value={selectedData.note}
         onChange={note => setSelectedData({ note })}
       />
-      <CategorySectionWrapper>
-        <CategorySection
-          value={selectedData.selectedCategory}
-          onChange={selectedCategory => setSelectedData({ selectedCategory })}
-        />
-      </CategorySectionWrapper>
+      <CategorySection
+        background={'#c4c4c4'}
+        value={selectedData.selectedCategory}
+        onChange={selectedCategory => setSelectedData({ selectedCategory })}
+      />
       <NumberPadSection
         onChange={amount => setSelectedData({ amount })}
         onSave={async callback => {

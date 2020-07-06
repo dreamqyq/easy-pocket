@@ -1,14 +1,10 @@
-import React, { useState, ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Layout } from 'components/Layout';
 import { CategorySection } from 'components/CategorySection';
 import { Category, RecordItemWithTime } from 'types/pocket';
 import styled from 'styled-components';
 import { useRecords } from 'hooks/useRecords';
 import day from 'dayjs';
-
-const CategorySectionWrapper = styled.div`
-  background: #fff;
-`;
 
 const Item = styled.div`
   display: flex;
@@ -55,14 +51,12 @@ const Bill: React.FC = () => {
 
   return (
     <Layout>
-      <CategorySectionWrapper>
-        <CategorySection
-          value={category}
-          onChange={category => {
-            setCategory(category);
-          }}
-        />
-      </CategorySectionWrapper>
+      <CategorySection
+        value={category}
+        onChange={category => {
+          setCategory(category);
+        }}
+      />
       {dateAndRecordsSortByDate.map(([date, records]) => (
         <div key={date}>
           <Header>{date}</Header>
