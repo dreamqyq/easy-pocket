@@ -17,7 +17,6 @@ const PieChart: React.FC<Props> = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(options, chart.current);
     chart.current.setOption(options);
   }, [options]);
 
