@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import { Category } from 'types/pocket';
 
-const Wrapper = styled.section`
+type WrapProps = {
+  background: string
+}
+const Wrapper = styled.section<WrapProps>`
+  background: ${props => props.background};
   font-size: 24px;
   line-height: 72px;
   > ul {
@@ -30,6 +34,7 @@ const Wrapper = styled.section`
 type Props = {
   value: Category;
   onChange: (selectedCategory: Category) => void;
+  background?: string;
 };
 
 const CategorySection: React.FC<Props> = props => {
@@ -37,7 +42,7 @@ const CategorySection: React.FC<Props> = props => {
   const currentCategory = props.value;
   const [categoryList] = useState<Array<Category>>(['-', '+']);
   return (
-    <Wrapper>
+    <Wrapper background={props.background!}>
       <ul>
         {categoryList.map(category => (
           <li
@@ -51,6 +56,10 @@ const CategorySection: React.FC<Props> = props => {
       </ul>
     </Wrapper>
   );
+};
+
+CategorySection.defaultProps = {
+  background: '#fff'
 };
 
 export { CategorySection };

@@ -1,14 +1,9 @@
-import React, { useState, ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Layout } from 'components/Layout';
 import { CategorySection } from 'components/CategorySection';
-import { Category, RecordItemWithTime } from 'types/pocket';
+import { Category } from 'types/pocket';
 import styled from 'styled-components';
 import { useRecords } from 'hooks/useRecords';
-import day from 'dayjs';
-
-const CategorySectionWrapper = styled.div`
-  background: #fff;
-`;
 
 const Item = styled.div`
   display: flex;
@@ -30,39 +25,20 @@ const Header = styled.h3`
   padding: 10px 16px;
 `;
 
-const Statistics: React.FC = () => {
+const Bill: React.FC = () => {
   const [category, setCategory] = useState<Category>('-');
-  const { records } = useRecords();
-  const selectedRecords = records.filter(
-    record => record.selectedCategory === category
-  );
-  const recordsWithDateObj: { [K: string]: Array<RecordItemWithTime> } = {};
-  selectedRecords.forEach(record => {
-    const date = day(record.createAt).format('YYYY年MM月DD日');
-    if (!(date in recordsWithDateObj)) {
-      recordsWithDateObj[date] = [];
-    }
-    recordsWithDateObj[date].push(record);
-  });
-  const dateAndRecordsSortByDate = Object.entries(recordsWithDateObj).sort(
-    (a, b) => {
-      if (a[0] === b[0]) return 0;
-      if (a[0] < b[0]) return 1;
-      if (a[0] > b[0]) return -1;
-      return 0;
-    }
-  );
+  const { filterRecordWithCategory, sortRecordByDate } = useRecords();
+  const selectedRecords = filterRecordWithCategory(category);
+  const dateAndRecordsSortByDate = sortRecordByDate(selectedRecords);
 
   return (
     <Layout>
-      <CategorySectionWrapper>
-        <CategorySection
-          value={category}
-          onChange={category => {
-            setCategory(category);
-          }}
-        />
-      </CategorySectionWrapper>
+      <CategorySection
+        value={category}
+        onChange={category => {
+          setCategory(category);
+        }}
+      />
       {dateAndRecordsSortByDate.map(([date, records]) => (
         <div key={date}>
           <Header>{date}</Header>
@@ -91,4 +67,4 @@ const Statistics: React.FC = () => {
   );
 };
 
-export default Statistics;
+export default Bill;
