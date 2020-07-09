@@ -16,6 +16,7 @@ const Chart: React.FC = () => {
   return (
     <Layout>
       <CategorySection
+        height={54}
         value={category}
         onChange={category => {
           setCategory(category);
