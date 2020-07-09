@@ -3,12 +3,13 @@ import React, { useState } from 'react';
 import { Category } from 'types/pocket';
 
 type WrapProps = {
-  background: string
+  background: string;
+  height: number;
 }
 const Wrapper = styled.section<WrapProps>`
   background: ${props => props.background};
   font-size: 24px;
-  line-height: 72px;
+  line-height: ${props => props.height}px;
   > ul {
     display: flex;
     > li {
@@ -35,6 +36,7 @@ type Props = {
   value: Category;
   onChange: (selectedCategory: Category) => void;
   background?: string;
+  height?: number;
 };
 
 const CategorySection: React.FC<Props> = props => {
@@ -42,7 +44,7 @@ const CategorySection: React.FC<Props> = props => {
   const currentCategory = props.value;
   const [categoryList] = useState<Array<Category>>(['-', '+']);
   return (
-    <Wrapper background={props.background!}>
+    <Wrapper background={props.background!} height={props.height!}>
       <ul>
         {categoryList.map(category => (
           <li
@@ -59,7 +61,8 @@ const CategorySection: React.FC<Props> = props => {
 };
 
 CategorySection.defaultProps = {
-  background: '#fff'
+  background: '#fff',
+  height: 72
 };
 
 export { CategorySection };

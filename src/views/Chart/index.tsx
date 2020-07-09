@@ -13,14 +13,18 @@ const Chart: React.FC = () => {
     .map(record => (
       { value: record.amount, name: day(record.createAt).format('YYYY年MM月DD日') }
     ));
+  const categoryHeader = (
+    <CategorySection
+      height={54}
+      value={category}
+      onChange={category => {
+        setCategory(category);
+      }}
+    />
+  );
+
   return (
-    <Layout>
-      <CategorySection
-        value={category}
-        onChange={category => {
-          setCategory(category);
-        }}
-      />
+    <Layout header={categoryHeader}>
       <PieChart data={data} />
     </Layout>
   );

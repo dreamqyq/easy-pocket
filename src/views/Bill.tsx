@@ -30,15 +30,18 @@ const Bill: React.FC = () => {
   const { filterRecordWithCategory, sortRecordByDate } = useRecords();
   const selectedRecords = filterRecordWithCategory(category);
   const dateAndRecordsSortByDate = sortRecordByDate(selectedRecords);
+  const categoryHeader = (
+    <CategorySection
+      height={54}
+      value={category}
+      onChange={category => {
+        setCategory(category);
+      }}
+    />
+  );
 
   return (
-    <Layout>
-      <CategorySection
-        value={category}
-        onChange={category => {
-          setCategory(category);
-        }}
-      />
+    <Layout header={categoryHeader}>
       {dateAndRecordsSortByDate.map(([date, records]) => (
         <div key={date}>
           <Header>{date}</Header>
