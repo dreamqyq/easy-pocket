@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, ReactNode } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Nav } from './Nav';
 
