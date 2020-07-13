@@ -8,8 +8,8 @@ import day from 'dayjs';
 
 const Chart: React.FC = () => {
   const [category, setCategory] = useState<Category>('-');
-  const { filterRecordWithCategory } = useRecords();
-  const data = filterRecordWithCategory(category)
+  const { filterRecordByCategory } = useRecords();
+  const data = filterRecordByCategory(category)
     .map(record => (
       { value: record.amount, name: day(record.createAt).format('YYYY年MM月DD日') }
     ));

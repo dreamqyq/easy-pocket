@@ -27,8 +27,8 @@ const Header = styled.h3`
 
 const Bill: React.FC = () => {
   const [category, setCategory] = useState<Category>('-');
-  const { filterRecordWithCategory, sortRecordByDate } = useRecords();
-  const selectedRecords = filterRecordWithCategory(category);
+  const { filterRecordByCategory, sortRecordByDate } = useRecords();
+  const selectedRecords = filterRecordByCategory(category);
   const dateAndRecordsSortByDate = sortRecordByDate(selectedRecords);
   const categoryHeader = (
     <CategorySection

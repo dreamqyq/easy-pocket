@@ -37,7 +37,7 @@ const useRecords = () => {
     });
   };
 
-  const filterRecordWithCategory = (category: Category) => {
+  const filterRecordByCategory = (category: Category) => {
     return records.filter(record => record.selectedCategory === category);
   };
 
@@ -60,7 +60,7 @@ const useRecords = () => {
     );
   };
 
-  return { addRecord, filterRecordWithCategory, sortRecordByDate };
+  return { addRecord, filterRecordByCategory, sortRecordByDate };
 };
 
 export { useRecords };
