@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Category, RecordItem, RecordItemWithTime } from 'types/pocket';
+import { Category, RecordByTagInterface, RecordItem, RecordItemWithTime } from 'types/pocket';
 import { useUpdate } from './useUpdate';
 import { defaultRecords } from 'data/defaultRecords';
 import day from 'dayjs';
@@ -41,6 +41,22 @@ const useRecords = () => {
     return records.filter(record => record.selectedCategory === category);
   };
 
+  const categorizeRecordByTags = (selectRecords: RecordItemWithTime[]) => {
+    const recordWithTagName: RecordByTagInterface = {};
+    const countRecordAmountByTags: { [TagName: string]: number } = {};
+    selectRecords.forEach(record => {
+      record.selectedTags.forEach(tag => {
+        if (!(tag.name in recordWithTagName)) {
+          recordWithTagName[tag.name] = [];
+          countRecordAmountByTags[tag.name] = 0;
+        }
+        recordWithTagName[tag.name].push(record);
+        countRecordAmountByTags[tag.name] += record.amount;
+      });
+    });
+    return { recordWithTagName, countRecordAmountByTags };
+  };
+
   const sortRecordByDate = (selectedRecords: RecordItemWithTime[]) => {
     const recordsWithDateObj: { [K: string]: Array<RecordItemWithTime> } = {};
     selectedRecords.forEach(record => {
@@ -60,7 +76,7 @@ const useRecords = () => {
     );
   };
 
-  return { addRecord, filterRecordByCategory, sortRecordByDate };
+  return { addRecord, categorizeRecordByTags, filterRecordByCategory, sortRecordByDate };
 };
 
 export { useRecords };

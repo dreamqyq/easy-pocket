@@ -27,3 +27,4 @@ export type RecordItemWithTime = {
 };
 
 export type RecordItem = Omit<RecordItemWithTime, 'createAt'>;
+export type RecordByTagInterface = { [K: string]: RecordItemWithTime[] };
