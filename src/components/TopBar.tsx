@@ -14,13 +14,13 @@ const TopBarWrap = styled.header`
 `;
 
 type Props = {
-  title: string
+  title: string;
+  goBack?: () => void;
 }
 const TopBar: React.FC<Props> = (props) => {
   const history = useHistory();
-
   const clickHandle = () => {
-    history.goBack();
+    props.goBack ? props.goBack() : history.goBack();
   };
 
   return (

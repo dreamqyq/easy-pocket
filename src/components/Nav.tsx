@@ -1,5 +1,5 @@
-import { NavLink, useHistory } from 'react-router-dom';
-import React from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Icon } from 'components/Icon';
 
@@ -59,12 +59,14 @@ const NavWrap = styled.nav`
 `;
 
 const Nav: React.FC = () => {
-  const history = useHistory();
+  const currentLocation = useLocation();
+  const [middleNavTo, setMiddleNavTo] = useState('/bill');
 
-  const toPocketPage = (event: React.MouseEvent<SVGElement, MouseEvent>) => {
-    event.preventDefault();
-    history.push('/pocket');
-  };
+  useEffect(() => {
+    if (currentLocation.pathname === '/bill') {
+      setMiddleNavTo('/pocket');
+    }
+  }, [currentLocation]);
 
   return (
     <NavWrap>
@@ -76,11 +78,10 @@ const Nav: React.FC = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/bill" replace activeClassName="active">
-            <Icon name="plus"
-                  className='plus'
-                  onClick={(event) => toPocketPage(event)}
-            />
+          <NavLink to={middleNavTo} replace activeClassName="active" isActive={(match, location) => {
+            return location.pathname === '/bill' || location.pathname === '/pocket';
+          }}>
+            <Icon name="plus" className='plus' />
             <Icon name="pocket" className='pocket' />
             <span className='pocket'>账单</span>
             <span className='record'>记一笔</span>

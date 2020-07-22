@@ -60,7 +60,7 @@ const PieChart: React.FC<Props> = (props) => {
   const chart = useRef({} as ECharts);
 
   useEffect(() => {
-    const width = document.documentElement.clientWidth;
+    const width = document.documentElement.clientWidth <= 500 ? document.documentElement.clientWidth : 500;
     container.current.style.width = `${width - 20}px`;
     container.current.style.height = `${(width - 20) * 1.2}px`;
     chart.current = init(container.current, 'light');

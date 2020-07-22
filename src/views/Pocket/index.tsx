@@ -9,6 +9,7 @@ import { Category } from 'types/pocket';
 import { Tag } from 'types';
 import { useRecords } from 'hooks/useRecords';
 import { TopBar } from 'components/TopBar';
+import { useHistory } from 'react-router-dom';
 
 const PocketLayout = styled(Layout)`
   display: flex;
@@ -23,6 +24,7 @@ const initialFormData = {
 };
 
 const Pocket: React.FC = () => {
+  const history = useHistory();
   const [selectedData, _setSelectedData] = useState(initialFormData);
   const { addRecord } = useRecords();
   const setSelectedData = (newValue: Partial<typeof selectedData>) => {
@@ -44,7 +46,7 @@ const Pocket: React.FC = () => {
   };
   return (
     <PocketLayout scrollTop={9999} showBottomBar={false}>
-      <TopBar title="记一笔" />
+      <TopBar title="记一笔" goBack={() => history.replace('/bill')} />
       <TagsSection
         value={selectedData.selectedTags}
         onChange={selectedTags => setSelectedData({ selectedTags })}
