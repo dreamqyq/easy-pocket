@@ -56,7 +56,7 @@ const Pocket: React.FC = () => {
         onChange={note => setSelectedData({ note })}
       />
       <CategorySection
-        background={'#c4c4c4'}
+        background={'#e4e4e4'}
         value={selectedData.selectedCategory}
         onChange={selectedCategory => setSelectedData({ selectedCategory })}
       />
