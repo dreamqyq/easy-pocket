@@ -10,6 +10,7 @@ import { Tag } from 'types';
 import { useRecords } from 'hooks/useRecords';
 import { TopBar } from 'components/TopBar';
 import { useHistory } from 'react-router-dom';
+import { Popup } from 'components/Popup';
 
 const PocketLayout = styled(Layout)`
   display: flex;
@@ -26,6 +27,7 @@ const initialFormData = {
 const Pocket: React.FC = () => {
   const history = useHistory();
   const [selectedData, _setSelectedData] = useState(initialFormData);
+  const [userInputSectionShow, setUserInputSectionShow] = useState(true);
   const { addRecord } = useRecords();
   const setSelectedData = (newValue: Partial<typeof selectedData>) => {
     _setSelectedData({
@@ -51,21 +53,23 @@ const Pocket: React.FC = () => {
         value={selectedData.selectedTags}
         onChange={selectedTags => setSelectedData({ selectedTags })}
       />
-      <NoteSection
-        value={selectedData.note}
-        onChange={note => setSelectedData({ note })}
-      />
-      <CategorySection
-        background={'#e4e4e4'}
-        value={selectedData.selectedCategory}
-        onChange={selectedCategory => setSelectedData({ selectedCategory })}
-      />
-      <NumberPadSection
-        onChange={amount => setSelectedData({ amount })}
-        onSave={async callback => {
-          await submit(callback);
-        }}
-      />
+      <Popup show={userInputSectionShow}>
+        <NoteSection
+          value={selectedData.note}
+          onChange={note => setSelectedData({ note })}
+        />
+        <CategorySection
+          background={'#e4e4e4'}
+          value={selectedData.selectedCategory}
+          onChange={selectedCategory => setSelectedData({ selectedCategory })}
+        />
+        <NumberPadSection
+          onChange={amount => setSelectedData({ amount })}
+          onSave={async callback => {
+            await submit(callback);
+          }}
+        />
+      </Popup>
     </PocketLayout>
   );
 };

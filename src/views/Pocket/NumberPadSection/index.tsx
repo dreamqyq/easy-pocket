@@ -27,10 +27,9 @@ const NumberPadSection: React.FC<Props> = props => {
     const text = (event.target as HTMLInputElement).textContent as InputString;
     if (text === null) return;
     if (text === '保存') {
-      props.onSave &&
-        props.onSave(() => {
-          _setOutput('0');
-        });
+      props.onSave && props.onSave(() => {
+        _setOutput('0');
+      });
     } else {
       setOutput(calculateOutput(text, output));
     }
