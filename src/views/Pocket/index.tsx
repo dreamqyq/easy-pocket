@@ -47,7 +47,7 @@ const Pocket: React.FC = () => {
       });
   };
   return (
-    <PocketLayout scrollTop={9999} showBottomBar={false}>
+    <PocketLayout showBottomBar={false}>
       <TopBar title="记一笔" goBack={() => history.replace('/bill')} />
       <TagsSection
         value={selectedData.selectedTags}
