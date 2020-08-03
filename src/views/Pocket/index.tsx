@@ -52,6 +52,7 @@ const Pocket: React.FC = () => {
       <TagsSection
         value={selectedData.selectedTags}
         onChange={selectedTags => setSelectedData({ selectedTags })}
+        onClick={() => setUserInputSectionShow(!userInputSectionShow)}
       />
       <Popup show={userInputSectionShow}>
         <NoteSection

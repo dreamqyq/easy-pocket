@@ -2,7 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  border: 1px solid red;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  
+  > div{
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(100%);
+    &.active{
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 `;
 
 type Props = {
@@ -10,7 +22,9 @@ type Props = {
 }
 const Popup: React.FC<Props> = (props) => {
   return <Wrapper>
-    {props.children}
+    <div className={props.show ? 'active' : ''}>
+      {props.children}
+    </div>
   </Wrapper>;
 };
 

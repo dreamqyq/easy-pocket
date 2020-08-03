@@ -9,7 +9,7 @@ const Wrapper = styled.section`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: flex-start;
   > ol {
     margin-left: -12px;
@@ -38,7 +38,8 @@ const Wrapper = styled.section`
 type Props = {
   value: Array<Tag>;
   onChange: (selectedTags: Array<Tag>) => void;
-};
+  onClick: () => void;
+} ;
 
 const TagsSection: React.FC<Props> = props => {
   const { tags, addTag, isTagsHasCurrentTag } = useTags();
@@ -55,7 +56,7 @@ const TagsSection: React.FC<Props> = props => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper onClick={props.onClick}>
       <ol>
         {tags.map(tag => (
           <li
