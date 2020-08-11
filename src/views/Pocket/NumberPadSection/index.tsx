@@ -13,8 +13,12 @@ const NumberPadSection: React.FC<Props> = props => {
   const setOutput = (value: string) => {
     const length = value.length;
     let newOutput: string;
-    if (length > 16) {
-      newOutput = value.slice(0, 16);
+    if (length > 13) {
+      if (value.includes('.')) {
+        newOutput = value.slice(0, 16);
+      } else {
+        newOutput = value.slice(0, 13);
+      }
     } else if (length === 0) {
       newOutput = '0';
     } else {
@@ -27,9 +31,10 @@ const NumberPadSection: React.FC<Props> = props => {
     const text = (event.target as HTMLInputElement).textContent as InputString;
     if (text === null) return;
     if (text === '保存') {
-      props.onSave && props.onSave(() => {
-        _setOutput('0');
-      });
+      props.onSave &&
+        props.onSave(() => {
+          _setOutput('0');
+        });
     } else {
       setOutput(calculateOutput(text, output));
     }

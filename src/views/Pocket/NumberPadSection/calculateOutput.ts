@@ -1,13 +1,22 @@
 import { InputString } from 'types/pocket';
 
+const formatNumber = (text: InputString, originOutput: string): string => {
+  if (originOutput === '0') {
+    return text;
+  } else {
+    const result = originOutput + text;
+    const dotIndex = result.indexOf('.');
+    if (dotIndex >= 0) {
+      return result.slice(0, dotIndex + 3);
+    }
+    return result;
+  }
+};
+
 const calculateOutput = (text: InputString, originOutput: string): string => {
   switch (true) {
     case !isNaN(parseInt(text)):
-      if (originOutput === '0') {
-        return text;
-      } else {
-        return originOutput + text;
-      }
+      return formatNumber(text, originOutput);
     case text === '.':
       if (originOutput.includes('.')) {
         return originOutput;
