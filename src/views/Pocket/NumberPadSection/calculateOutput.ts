@@ -1,4 +1,5 @@
-import { InputString } from 'types/pocket';
+import { InputString, MathCharacter } from 'types/pocket';
+import { mathCharacterArray } from 'data/mathCharacter';
 
 const formatNumber = (text: InputString, originOutput: string): string => {
   if (originOutput === '0') {
@@ -23,6 +24,9 @@ const calculateOutput = (text: InputString, originOutput: string): string => {
       } else {
         return originOutput + text;
       }
+    case mathCharacterArray.includes(text as MathCharacter):
+      console.log(text);
+      return originOutput;
     case text === '删除': {
       const length = originOutput.length;
       if (length > 1) {
