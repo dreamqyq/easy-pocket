@@ -14,15 +14,11 @@ const Wrapper = styled.section`
     > button {
       border: 1px solid #e4e4e4;
       font-size: 18px;
-      width: 20%;
+      width: 25%;
       height: 64px;
       float: left;
       &.ok {
-        height: 128px;
         float: right;
-      }
-      &.zero {
-        width: 40%;
       }
     }
   }

@@ -1,7 +1,7 @@
 import { Tag } from './index';
 
 // readonly, cannot export and use it
-const mathCharacter = ['+', '-', '×', '÷'] as const;
+const mathCharacter = ['+', '-'] as const;
 /**
  * The reason for the [number] is that without it typeof mathCharacter
  * would return an array type. With the index signature typeof

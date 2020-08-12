@@ -1,3 +1,3 @@
-const mathCharacterArray = ['+', '-', '×', '÷'];
+const mathCharacterArray = ['+', '-'];
 
 export { mathCharacterArray };
