@@ -6,9 +6,20 @@ const Wrapper = styled.section`
   > div.output {
     background: #fff;
     font-size: 36px;
-    line-height: 72px;
-    text-align: right;
+    height: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
     padding: 0 16px;
+    p {
+      &.result {
+        font-size: 32px;
+      }
+      &.small {
+        font-size: 24px;
+      }
+    }
   }
   > div.pad {
     > button {

@@ -19,14 +19,9 @@ const calculateOutput = (text: InputString, originOutput: string): string => {
     case !isNaN(parseInt(text)):
       return formatNumber(text, originOutput);
     case text === '.':
-      if (originOutput.includes('.')) {
-        return originOutput;
-      } else {
-        return originOutput + text;
-      }
+      return originOutput.includes('.') ? originOutput : originOutput + text;
     case mathCharacterArray.includes(text as MathCharacter):
-      console.log(text);
-      return originOutput;
+      return originOutput + text;
     case text === '删除': {
       const length = originOutput.length;
       if (length > 1) {

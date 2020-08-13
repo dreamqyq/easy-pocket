@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Wrapper } from './Wrapper';
 import { calculateOutput } from './calculateOutput';
 import { InputString } from 'types/pocket';
+import { mathCharacterArray } from 'data/mathCharacter';
 
 type Props = {
   onChange: (amount: number) => void;
@@ -10,6 +11,7 @@ type Props = {
 
 const NumberPadSection: React.FC<Props> = props => {
   const [output, _setOutput] = useState<string>('0');
+  const [isCaculate, setIsCaculate] = useState(false);
   const setOutput = (value: string) => {
     const length = value.length;
     let newOutput: string;
@@ -24,6 +26,7 @@ const NumberPadSection: React.FC<Props> = props => {
     } else {
       newOutput = value;
     }
+    setIsCaculate(mathCharacterArray.some(value => newOutput.includes(value)));
     _setOutput(newOutput);
     props.onChange(parseFloat(newOutput));
   };
@@ -41,7 +44,10 @@ const NumberPadSection: React.FC<Props> = props => {
   };
   return (
     <Wrapper>
-      <div className="output">{output}</div>
+      <div className="output">
+        <p className={isCaculate ? 'result' : ''}>{output}</p>
+        {isCaculate ? <p className="small">{output}</p> : null}
+      </div>
       <div className="pad clearfix" onClick={editOutput}>
         <button>1</button>
         <button>2</button>
@@ -55,7 +61,7 @@ const NumberPadSection: React.FC<Props> = props => {
         <button>8</button>
         <button>9</button>
         <button>-</button>
-        <button className="ok">保存</button>
+        <button className="ok">{isCaculate ? '=' : '保存'}</button>
         <button>清空</button>
         <button>0</button>
         <button>.</button>
