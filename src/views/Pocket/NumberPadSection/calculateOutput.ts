@@ -1,5 +1,5 @@
-import { InputString, MathCharacter } from 'types/pocket';
-import { mathCharacterArray } from 'data/mathCharacter';
+import { InputString } from 'types/pocket';
+import { characterHasPlusOrMinus } from 'utils';
 
 const formatNumber = (text: InputString, originOutput: string): string => {
   if (originOutput === '0') {
@@ -20,8 +20,11 @@ const calculateOutput = (text: InputString, originOutput: string): string => {
       return formatNumber(text, originOutput);
     case text === '.':
       return originOutput.includes('.') ? originOutput : originOutput + text;
-    case mathCharacterArray.includes(text as MathCharacter):
-      return originOutput + text;
+    case characterHasPlusOrMinus(text):
+      const originLastWord = originOutput.slice(-1);
+      return characterHasPlusOrMinus(originLastWord)
+        ? originOutput
+        : originOutput + text;
     case text === '删除': {
       const length = originOutput.length;
       if (length > 1) {

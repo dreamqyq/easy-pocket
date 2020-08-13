@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Wrapper } from './Wrapper';
 import { calculateOutput } from './calculateOutput';
 import { InputString } from 'types/pocket';
-import { mathCharacterArray } from 'data/mathCharacter';
+import { stringHasPlusOrMinus } from 'utils';
 
 type Props = {
   onChange: (amount: number) => void;
@@ -13,10 +13,13 @@ const NumberPadSection: React.FC<Props> = props => {
   const [output, _setOutput] = useState<string>('0');
   const [isCaculate, setIsCaculate] = useState(false);
   const setOutput = (value: string) => {
+    const valueHasPlusOrMinus = stringHasPlusOrMinus(value);
     const length = value.length;
     let newOutput: string;
     if (length > 13) {
-      if (value.includes('.')) {
+      if (valueHasPlusOrMinus) {
+        newOutput = value.slice(0, 20);
+      } else if (value.includes('.')) {
         newOutput = value.slice(0, 16);
       } else {
         newOutput = value.slice(0, 13);
@@ -26,7 +29,7 @@ const NumberPadSection: React.FC<Props> = props => {
     } else {
       newOutput = value;
     }
-    setIsCaculate(mathCharacterArray.some(value => newOutput.includes(value)));
+    setIsCaculate(valueHasPlusOrMinus);
     _setOutput(newOutput);
     props.onChange(parseFloat(newOutput));
   };
