@@ -30,6 +30,7 @@ const QRCodeWrap = styled.div`
   align-items: center;
   color: #fff;
   font-size: 18px;
+  z-index: 9999;
   > span{
     padding: 10px;
     cursor: pointer;

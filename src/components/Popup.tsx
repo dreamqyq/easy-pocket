@@ -5,6 +5,7 @@ const Wrapper = styled.div`
   position: fixed;
   bottom: 0;
   width: 100vw;
+  max-width: 500px;
   transition: all 0.3s;
   opacity: 0;
   transform: translateY(100%);
