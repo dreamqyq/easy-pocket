@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Wrapper } from './Wrapper';
 import { calculateOutput } from './calculateOutput';
 import { InputString } from 'types/pocket';
-import { stringHasPlusOrMinus } from 'utils';
+import { characterHasPlusOrMinus } from '../../../utils';
 
 type Props = {
   onChange: (amount: number) => void;
@@ -11,15 +11,14 @@ type Props = {
 
 const NumberPadSection: React.FC<Props> = props => {
   const [output, _setOutput] = useState<string>('0');
+  const [expression, setExpression] = useState('0');
   const [isCalculate, setIsCalculate] = useState(false);
+
   const setOutput = (value: string) => {
-    const valueHasPlusOrMinus = stringHasPlusOrMinus(value);
     const length = value.length;
     let newOutput: string;
     if (length > 13) {
-      if (valueHasPlusOrMinus) {
-        newOutput = value.slice(0, 20);
-      } else if (value.includes('.')) {
+      if (value.includes('.')) {
         newOutput = value.slice(0, 16);
       } else {
         newOutput = value.slice(0, 13);
@@ -29,10 +28,10 @@ const NumberPadSection: React.FC<Props> = props => {
     } else {
       newOutput = value;
     }
-    setIsCalculate(valueHasPlusOrMinus);
     _setOutput(newOutput);
     props.onChange(parseFloat(newOutput));
   };
+
   const editOutput = (event: React.MouseEvent) => {
     const text = (event.target as HTMLInputElement).textContent as InputString;
     if (text === null) return;
@@ -42,14 +41,20 @@ const NumberPadSection: React.FC<Props> = props => {
         _setOutput('0');
       });
     } else {
-      setOutput(calculateOutput(text, output));
+      const outPutObj = calculateOutput(text, output, expression);
+      const newExpression = outPutObj.expression || expression;
+      console.log(outPutObj);
+      setExpression(newExpression);
+      setIsCalculate(characterHasPlusOrMinus(newExpression));
+      setOutput(outPutObj.output);
     }
   };
+
   return (
     <Wrapper>
       <div className="output">
         <p className={isCalculate ? 'result' : ''}>{output}</p>
-        {isCalculate ? <p className="small">{output}</p> : null}
+        {isCalculate ? <p className="small">{expression}</p> : null}
       </div>
       <div className="pad clearfix" onClick={editOutput}>
         <button>1</button>

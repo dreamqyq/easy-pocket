@@ -14,31 +14,33 @@ const formatNumber = (text: InputString, originOutput: string): string => {
   }
 };
 
-const calculateOutput = (text: InputString, originOutput: string): string => {
+type OutPutObj = {
+  expression: string;
+  output: string
+}
+const calculateOutput = (text: InputString, originOutput: string, originExpression: string): OutPutObj => {
+  const result: OutPutObj = { expression: originExpression, output: originOutput };
+  const length = originOutput.length;
   switch (true) {
     case !isNaN(parseInt(text)):
-      return formatNumber(text, originOutput);
+      result.output = formatNumber(text, originOutput);
+      break;
     case text === '.':
-      return originOutput.includes('.') ? originOutput : originOutput + text;
+      result.output = originOutput.includes('.') ? originOutput : originOutput + text;
+      break;
     case characterHasPlusOrMinus(text):
       const originLastWord = originOutput.slice(-1);
-      return characterHasPlusOrMinus(originLastWord)
-        ? originOutput
-        : originOutput + text;
-    case text === '删除': {
-      const length = originOutput.length;
-      if (length > 1) {
-        return originOutput.slice(0, -1) || '';
-      } else if (length === 1) {
-        return '';
-      }
-      return '';
-    }
+      result.expression = characterHasPlusOrMinus(originLastWord) ? originOutput : originOutput + text;
+      break;
+    case text === '删除' && length > 1:
+      result.output = originOutput.slice(0, -1) || '';
+      break;
     case text === '清空':
-      return '';
     default:
-      return '';
+      result.output = '';
+      result.expression = result.output;
   }
+  return result;
 };
 
 export { calculateOutput };
