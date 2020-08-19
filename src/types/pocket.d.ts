@@ -22,6 +22,7 @@ export type InputString =
   | '8'
   | '9'
   | '.'
+  | '='
   | '删除'
   | '清空'
   | '保存'
