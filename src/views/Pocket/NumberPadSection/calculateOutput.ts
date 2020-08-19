@@ -14,6 +14,21 @@ const formatNumber = (text: InputString, originOutput: string): string => {
   }
 };
 
+const calculateExpression = (expression: string): string => {
+  if (expression === '') return '0';
+  const array = expression.split(/([+|-])/g);
+  let result = parseFloat(array[0]);
+  array.forEach((item, index) => {
+    const nextNumber = parseFloat(array[index + 1]) || 0;
+    if (item === '+') {
+      result += nextNumber;
+    } else if (item === '-') {
+      result -= nextNumber;
+    }
+  });
+  return result.toFixed(2);
+};
+
 type OutPutObj = {
   expression: string;
   output: string
