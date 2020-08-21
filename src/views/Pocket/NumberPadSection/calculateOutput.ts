@@ -89,9 +89,17 @@ const calculateOutput = (text: InputString, originOutput: string, originExpressi
         result.expression = originOutput + text;
       }
       break;
-    case text === '删除' && length > 1 && !parseFloat(originOutput):
-      result.output = originOutput.slice(0, -1) || '';
-      result.expression = originExpression.slice(0, -1) || '';
+    case text === '删除' && length > 1 && !!parseFloat(originOutput):
+      if (originExpression) {
+        result.expression = originExpression.slice(0, -1) || '';
+        result.output = calculateExpression(result.expression);
+      } else {
+        if (originOutput.slice(-2, -1) === '.') {
+          result.output = originOutput.slice(0, -2) || '';
+        } else {
+          result.output = originOutput.slice(0, -1) || '';
+        }
+      }
       break;
     case text === '清空':
     default:
