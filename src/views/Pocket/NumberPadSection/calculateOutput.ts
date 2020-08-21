@@ -1,5 +1,5 @@
 import { InputString } from 'types/pocket';
-import { characterHasPlusOrMinus, stringHasPlusOrMinus } from 'utils';
+import { characterHasPlusOrMinus } from 'utils';
 
 
 const formatNumber = (text: InputString, originOutput: string): string => {
@@ -27,17 +27,13 @@ const expressionSplitByLastCharacter = (expression: string): Array<string> => {
 };
 
 const formatExpression = (text: InputString, originExpression: string): string => {
-  if (originExpression === '') {
-    return text;
+  const array = expressionSplitByLastCharacter(originExpression);
+  if (array.length === 1) {
+    return originExpression + text;
   } else {
-    const array = expressionSplitByLastCharacter(originExpression);
-    if (array.length === 1) {
-      return originExpression + text;
-    } else {
-      const lastNumber = array[array.length - 1];
-      array[array.length - 1] = formatNumber(text, lastNumber);
-      return array.join('');
-    }
+    const lastNumber = array[array.length - 1];
+    array[array.length - 1] = formatNumber(text, lastNumber);
+    return array.join('');
   }
 };
 
@@ -53,7 +49,7 @@ const calculateExpression = (expression: string): string => {
       result -= nextNumber;
     }
   });
-  return result.toFixed(2);
+  return result.toString();
 };
 
 const formatNumberWithDot = (text: string, originOutput: string): string => {
@@ -69,21 +65,29 @@ const calculateOutput = (text: InputString, originOutput: string, originExpressi
   const length = originOutput.length;
   switch (true) {
     case !isNaN(parseInt(text)):
-      result.output = formatNumber(text, originOutput);
-      if (stringHasPlusOrMinus(originExpression)) {
+      if (originExpression) {
         result.expression = formatExpression(text, originExpression);
+        result.output = calculateExpression(result.expression);
+      } else {
+        result.output = formatNumber(text, originOutput);
       }
       break;
     case text === '.':
       result.output = formatNumberWithDot(text, originOutput);
-      const array = expressionSplitByLastCharacter(originExpression);
-      array[array.length - 1] = formatNumberWithDot(text, array[array.length - 1]);
-      result.expression = array.join('');
+      if (originExpression) {
+        const array = expressionSplitByLastCharacter(originExpression);
+        array[array.length - 1] = formatNumberWithDot(text, array[array.length - 1]);
+        result.expression = array.join('');
+      }
       break;
     case characterHasPlusOrMinus(text):
-      const originLastWord = originExpression.slice(-1);
-      result.expression = characterHasPlusOrMinus(originLastWord) ? originOutput : originOutput + text;
-      result.output = calculateExpression(result.expression);
+      if (originExpression) {
+        const originLastWord = originExpression.slice(-1);
+        result.expression = characterHasPlusOrMinus(originLastWord) ? originExpression : originExpression + text;
+        result.output = calculateExpression(result.expression);
+      } else {
+        result.expression = originOutput + text;
+      }
       break;
     case text === '删除' && length > 1 && !parseFloat(originOutput):
       result.output = originOutput.slice(0, -1) || '';
