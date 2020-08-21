@@ -9,4 +9,8 @@ const stringHasPlusOrMinus = (string: string): boolean => {
   return mathCharacterArray.some(value => string.includes(value));
 };
 
-export { characterHasPlusOrMinus, stringHasPlusOrMinus };
+const stringNumber2Decimal = (stringNumber: string): string => {
+  return parseFloat(stringNumber).toFixed(2);
+};
+
+export { characterHasPlusOrMinus, stringHasPlusOrMinus, stringNumber2Decimal };
