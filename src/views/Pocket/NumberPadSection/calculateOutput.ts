@@ -10,9 +10,9 @@ const formatNumber = (text: InputString, originOutput: string): string => {
     const dotIndex = result.indexOf('.');
     if (dotIndex >= 0) {
       result = result.slice(0, dotIndex + 3);
-    }
-    if (originOutput.slice(dotIndex + 1) === '00' && text !== '0') {
-      result = result.slice(0, -1) + text;
+      if (originOutput.slice(dotIndex + 1) === '00' && text !== '0') {
+        result = result.slice(0, -1) + text;
+      }
     }
     return result;
   }

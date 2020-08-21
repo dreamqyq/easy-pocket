@@ -11,7 +11,7 @@ type Props = {
 
 const NumberPadSection: React.FC<Props> = props => {
   const [output, _setOutput] = useState<string>('0');
-  const [expression, setExpression] = useState('');
+  const [expression, _setExpression] = useState('');
   const [isCalculate, setIsCalculate] = useState(false);
 
   const setOutput = (value: string) => {
@@ -30,6 +30,14 @@ const NumberPadSection: React.FC<Props> = props => {
     }
     _setOutput(newOutput);
     props.onChange(parseFloat(newOutput));
+  };
+
+  const setExpression = (value: string) => {
+    let newExpression = value;
+    if (value.length > 20) {
+      newExpression = value.slice(0, 25);
+    }
+    _setExpression(newExpression);
   };
 
   const editOutput = (event: React.MouseEvent) => {
