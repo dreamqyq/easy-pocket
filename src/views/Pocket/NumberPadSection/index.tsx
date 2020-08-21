@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Wrapper } from './Wrapper';
 import { calculateOutput } from './calculateOutput';
 import { InputString } from 'types/pocket';
-import { stringHasPlusOrMinus } from 'utils';
+import { stringHasPlusOrMinus, stringNumber2Decimal } from 'utils';
 
 type Props = {
   onChange: (amount: number) => void;
@@ -10,8 +10,8 @@ type Props = {
 };
 
 const NumberPadSection: React.FC<Props> = props => {
-  const [output, _setOutput] = useState<string>('0.00');
-  const [expression, setExpression] = useState('0.00');
+  const [output, _setOutput] = useState<string>('0');
+  const [expression, setExpression] = useState('');
   const [isCalculate, setIsCalculate] = useState(false);
 
   const setOutput = (value: string) => {
@@ -24,7 +24,7 @@ const NumberPadSection: React.FC<Props> = props => {
         newOutput = value.slice(0, 13);
       }
     } else if (length === 0) {
-      newOutput = '0.00';
+      newOutput = '0';
     } else {
       newOutput = value;
     }
@@ -38,7 +38,7 @@ const NumberPadSection: React.FC<Props> = props => {
     if (text === '保存') {
       props.onSave &&
       props.onSave(() => {
-        _setOutput('0.00');
+        _setOutput('0');
       });
     } else if (text === '=') {
       setIsCalculate(false);
@@ -55,7 +55,7 @@ const NumberPadSection: React.FC<Props> = props => {
   return (
     <Wrapper>
       <div className="output">
-        <p className={isCalculate ? 'result' : ''}>{output}</p>
+        <p className={isCalculate ? 'result' : ''}>{stringNumber2Decimal(output)}</p>
         {isCalculate ? <p className="small">{expression}</p> : null}
       </div>
       <div className="pad clearfix" onClick={editOutput}>

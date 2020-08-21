@@ -1,25 +1,25 @@
 import { InputString } from 'types/pocket';
-import { characterHasPlusOrMinus } from 'utils';
+import { characterHasPlusOrMinus, stringHasPlusOrMinus } from 'utils';
 
-const stringNumber2Decimal = (stringNumber: string): string => {
-  return parseFloat(stringNumber).toFixed(2);
-};
 
 const formatNumber = (text: InputString, originOutput: string): string => {
-  if (originOutput === '0.00') {
-    return stringNumber2Decimal(text);
+  if (originOutput === '0') {
+    return text;
   } else {
-    const result = originOutput + text;
+    let result = originOutput + text;
     const dotIndex = result.indexOf('.');
     if (dotIndex >= 0) {
-      return result.slice(0, dotIndex + 3);
+      result = result.slice(0, dotIndex + 3);
     }
-    return stringNumber2Decimal(result);
+    if (originOutput.slice(dotIndex + 1) === '00' && text !== '0') {
+      result = result.slice(0, -1) + text;
+    }
+    return result;
   }
 };
 
 const expressionSplitByLastCharacter = (expression: string): Array<string> => {
-  /**
+  /** example
    * "1+0.23-0.45+0.67-0.8" ==>
    * ["1+0.23-0.45+0.67", "-", "0.8"]
    */
@@ -27,7 +27,7 @@ const expressionSplitByLastCharacter = (expression: string): Array<string> => {
 };
 
 const formatExpression = (text: InputString, originExpression: string): string => {
-  if (originExpression === '0.00') {
+  if (originExpression === '') {
     return text;
   } else {
     const array = expressionSplitByLastCharacter(originExpression);
@@ -42,7 +42,7 @@ const formatExpression = (text: InputString, originExpression: string): string =
 };
 
 const calculateExpression = (expression: string): string => {
-  if (expression === '') return '0.00';
+  if (expression === '') return '0';
   const array = expression.split(/([+|-])/g);
   let result = parseFloat(array[0]);
   array.forEach((item, index) => {
@@ -56,8 +56,8 @@ const calculateExpression = (expression: string): string => {
   return result.toFixed(2);
 };
 
-const formatNumberWithDot = (text: string, output: string): string => {
-  return output.includes('.') ? output : output + text;
+const formatNumberWithDot = (text: string, originOutput: string): string => {
+  return originOutput.includes('.') ? originOutput : originOutput + text;
 };
 
 type OutPutObj = {
@@ -65,13 +65,14 @@ type OutPutObj = {
   output: string
 }
 const calculateOutput = (text: InputString, originOutput: string, originExpression: string): OutPutObj => {
-  debugger
   const result: OutPutObj = { expression: originExpression, output: originOutput };
   const length = originOutput.length;
   switch (true) {
     case !isNaN(parseInt(text)):
       result.output = formatNumber(text, originOutput);
-      result.expression = formatExpression(text, originExpression);
+      if (stringHasPlusOrMinus(originExpression)) {
+        result.expression = formatExpression(text, originExpression);
+      }
       break;
     case text === '.':
       result.output = formatNumberWithDot(text, originOutput);
@@ -84,14 +85,14 @@ const calculateOutput = (text: InputString, originOutput: string, originExpressi
       result.expression = characterHasPlusOrMinus(originLastWord) ? originOutput : originOutput + text;
       result.output = calculateExpression(result.expression);
       break;
-    case text === '删除' && length > 1:
+    case text === '删除' && length > 1 && !parseFloat(originOutput):
       result.output = originOutput.slice(0, -1) || '';
       result.expression = originExpression.slice(0, -1) || '';
       break;
     case text === '清空':
     default:
       result.output = '';
-      result.expression = result.output;
+      result.expression = '';
   }
   return result;
 };
