@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Wrapper } from './Wrapper';
 import { calculateOutput } from './calculateOutput';
 import { InputString } from 'types/pocket';
-import { stringHasPlusOrMinus, stringNumber2Decimal } from 'utils';
+import { stringHasPlusOrMinus, stringNumber2Decimal, stringNumberLimitLength } from 'utils';
 
 type Props = {
   onChange: (amount: number) => void;
@@ -15,19 +15,7 @@ const NumberPadSection: React.FC<Props> = props => {
   const [isCalculate, setIsCalculate] = useState(false);
 
   const setOutput = (value: string) => {
-    const length = value.length;
-    let newOutput: string;
-    if (length > 13) {
-      if (value.includes('.')) {
-        newOutput = value.slice(0, 16);
-      } else {
-        newOutput = value.slice(0, 13);
-      }
-    } else if (length === 0) {
-      newOutput = '0';
-    } else {
-      newOutput = value;
-    }
+    const newOutput = stringNumberLimitLength(value, 16);
     _setOutput(newOutput);
     props.onChange(parseFloat(newOutput));
   };
@@ -49,6 +37,7 @@ const NumberPadSection: React.FC<Props> = props => {
         _setOutput('0');
       });
     } else if (text === '=') {
+      setExpression('');
       setIsCalculate(false);
     } else {
       const outPutObj = calculateOutput(text, output, expression);

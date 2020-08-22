@@ -1,5 +1,5 @@
 import { InputString } from 'types/pocket';
-import { characterHasPlusOrMinus } from 'utils';
+import { characterHasPlusOrMinus, stringNumberLimitLength } from 'utils';
 
 
 const formatNumber = (text: InputString, originOutput: string): string => {
@@ -14,7 +14,7 @@ const formatNumber = (text: InputString, originOutput: string): string => {
         result = result.slice(0, -1) + text;
       }
     }
-    return result;
+    return stringNumberLimitLength(result, 16);
   }
 };
 
@@ -28,13 +28,15 @@ const expressionSplitByLastCharacter = (expression: string): Array<string> => {
 
 const formatExpression = (text: InputString, originExpression: string): string => {
   const array = expressionSplitByLastCharacter(originExpression);
+  let result: string;
   if (array.length === 1) {
-    return originExpression + text;
+    result = originExpression + text;
   } else {
     const lastNumber = array[array.length - 1];
     array[array.length - 1] = formatNumber(text, lastNumber);
-    return array.join('');
+    result = array.join('');
   }
+  return result.slice(0, 25);
 };
 
 const calculateExpression = (expression: string): string => {
