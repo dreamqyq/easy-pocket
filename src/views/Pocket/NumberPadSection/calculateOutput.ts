@@ -1,6 +1,10 @@
 import { InputString } from 'types/pocket';
 import { characterHasPlusOrMinus, stringNumberLimitLength } from 'utils';
 
+type OutPutObj = {
+  expression: string;
+  output: string
+}
 
 const formatNumber = (text: InputString, originOutput: string): string => {
   if (originOutput === '0') {
@@ -58,57 +62,80 @@ const formatNumberWithDot = (text: string, originOutput: string): string => {
   return originOutput.includes('.') ? originOutput : originOutput + text;
 };
 
-type OutPutObj = {
-  expression: string;
-  output: string
-}
-const calculateOutput = (text: InputString, originOutput: string, originExpression: string): OutPutObj => {
-  const result: OutPutObj = { expression: originExpression, output: originOutput };
-  const length = originOutput.length;
-  switch (true) {
-    case !isNaN(parseInt(text)):
-      if (originExpression) {
-        result.expression = formatExpression(text, originExpression);
-        result.output = calculateExpression(result.expression);
-      } else {
-        result.output = formatNumber(text, originOutput);
-      }
-      break;
-    case text === '.':
-      result.output = formatNumberWithDot(text, originOutput);
-      if (originExpression) {
-        const array = expressionSplitByLastCharacter(originExpression);
-        array[array.length - 1] = formatNumberWithDot(text, array[array.length - 1]);
-        result.expression = array.join('');
-      }
-      break;
-    case characterHasPlusOrMinus(text):
-      if (originExpression) {
-        const originLastWord = originExpression.slice(-1);
-        result.expression = characterHasPlusOrMinus(originLastWord) ? originExpression : originExpression + text;
-        result.output = calculateExpression(result.expression);
-      } else {
-        result.expression = originOutput + text;
-      }
-      break;
-    case text === '删除' && length > 1 && !!parseFloat(originOutput):
-      if (originExpression) {
-        result.expression = originExpression.slice(0, -1) || '';
-        result.output = calculateExpression(result.expression);
-      } else {
-        if (originOutput.slice(-2, -1) === '.') {
-          result.output = originOutput.slice(0, -2) || '';
-        } else {
-          result.output = originOutput.slice(0, -1) || '';
-        }
-      }
-      break;
-    case text === '清空':
-    default:
-      result.output = '';
-      result.expression = '';
+const handleInputNumber = (text: InputString, originOutput: string, originExpression: string): OutPutObj => {
+  const result: OutPutObj = {
+    output: originOutput,
+    expression: originExpression
+  };
+  if (originExpression) {
+    result.expression = formatExpression(text, originExpression);
+    result.output = calculateExpression(result.expression);
+  } else {
+    result.output = formatNumber(text, originOutput);
   }
   return result;
+};
+
+const handleInputDot = (text: InputString, originOutput: string, originExpression: string): OutPutObj => {
+  const result: OutPutObj = {
+    output: originOutput,
+    expression: originExpression
+  };
+  result.output = formatNumberWithDot(text, originOutput);
+  if (originExpression) {
+    const array = expressionSplitByLastCharacter(originExpression);
+    array[array.length - 1] = formatNumberWithDot(text, array[array.length - 1]);
+    result.expression = array.join('');
+  }
+  return result;
+};
+
+const handleInputCharacter = (text: InputString, originOutput: string, originExpression: string): OutPutObj => {
+  const result: OutPutObj = {
+    output: originOutput,
+    expression: originExpression
+  };
+  if (originExpression) {
+    const originLastWord = originExpression.slice(-1);
+    result.expression = characterHasPlusOrMinus(originLastWord) ? originExpression : originExpression + text;
+    result.output = calculateExpression(result.expression);
+  } else {
+    result.expression = originOutput + text;
+  }
+  return result;
+};
+
+const handleDelete = (text: InputString, originOutput: string, originExpression: string): OutPutObj => {
+  const result: OutPutObj = {
+    output: originOutput,
+    expression: originExpression
+  };
+  if (originExpression) {
+    result.expression = originExpression.slice(0, -1) || '';
+    result.output = calculateExpression(result.expression);
+  } else {
+    if (originOutput.slice(-2, -1) === '.') {
+      result.output = originOutput.slice(0, -2) || '';
+    } else {
+      result.output = originOutput.slice(0, -1) || '';
+    }
+  }
+  return result;
+};
+
+const calculateOutput = (text: InputString, originOutput: string, originExpression: string): OutPutObj => {
+  switch (true) {
+    case !isNaN(parseInt(text)):
+      return handleInputNumber(text, originOutput, originExpression);
+    case text === '.':
+      return handleInputDot(text, originOutput, originExpression);
+    case characterHasPlusOrMinus(text):
+      return handleInputCharacter(text, originOutput, originExpression);
+    case text === '删除' && originOutput.length > 1 && !!parseFloat(originOutput):
+      return handleDelete(text, originOutput, originExpression);
+    default:
+      return { output: '', expression: '' };
+  }
 };
 
 export { calculateOutput };

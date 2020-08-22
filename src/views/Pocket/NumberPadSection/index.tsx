@@ -42,7 +42,6 @@ const NumberPadSection: React.FC<Props> = props => {
     } else {
       const outPutObj = calculateOutput(text, output, expression);
       const newExpression = outPutObj.expression;
-      console.log(outPutObj);
       setExpression(newExpression);
       setIsCalculate(stringHasPlusOrMinus(newExpression));
       setOutput(outPutObj.output);
