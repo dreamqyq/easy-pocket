@@ -13,4 +13,26 @@ const stringNumber2Decimal = (stringNumber: string): string => {
   return parseFloat(stringNumber).toFixed(2);
 };
 
-export { characterHasPlusOrMinus, stringHasPlusOrMinus, stringNumber2Decimal };
+const stringNumberLimitLength = (stringNumber: string, limit: number): string => {
+  const length = stringNumber.length;
+  let result: string;
+  if (length > 13) {
+    if (stringNumber.includes('.')) {
+      result = stringNumber.slice(0, limit);
+    } else {
+      result = stringNumber.slice(0, limit - 3);
+    }
+  } else if (length === 0) {
+    result = '0';
+  } else {
+    result = stringNumber;
+  }
+  return result;
+};
+
+export {
+  characterHasPlusOrMinus,
+  stringHasPlusOrMinus,
+  stringNumber2Decimal,
+  stringNumberLimitLength
+};
