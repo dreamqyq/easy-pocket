@@ -9,7 +9,7 @@ const Wrapper = styled.section`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: flex-start;
   > ol {
     margin-left: -12px;
@@ -38,13 +38,18 @@ const Wrapper = styled.section`
 type Props = {
   value: Array<Tag>;
   onChange: (selectedTags: Array<Tag>) => void;
+  onClick: () => void;
 };
 
 const TagsSection: React.FC<Props> = props => {
   const { tags, addTag, isTagsHasCurrentTag } = useTags();
   const selectedTagsList = props.value;
 
-  const onToggleSelectedTag = (selectedTag: Tag) => {
+  const onToggleSelectedTag = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    selectedTag: Tag
+  ) => {
+    event.stopPropagation();
     if (isTagsHasCurrentTag(selectedTag.name, selectedTagsList)) {
       props.onChange(
         selectedTagsList.filter(tagObj => tagObj.id !== selectedTag.id)
@@ -55,7 +60,7 @@ const TagsSection: React.FC<Props> = props => {
   };
 
   return (
-    <Wrapper>
+    <Wrapper onClick={props.onClick}>
       <ol>
         {tags.map(tag => (
           <li
@@ -63,7 +68,7 @@ const TagsSection: React.FC<Props> = props => {
             className={
               isTagsHasCurrentTag(tag.name, selectedTagsList) ? 'selected' : ''
             }
-            onClick={() => onToggleSelectedTag(tag)}
+            onClick={event => onToggleSelectedTag(event, tag)}
           >
             {tag.name}
           </li>
