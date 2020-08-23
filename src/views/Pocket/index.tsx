@@ -11,6 +11,8 @@ import { useRecords } from 'hooks/useRecords';
 import { TopBar } from 'components/TopBar';
 import { useHistory } from 'react-router-dom';
 import { Popup } from 'components/Popup';
+import { Message } from 'components/Message';
+import { MessageType } from 'types/message';
 
 const PocketLayout = styled(Layout)`
   display: flex;
@@ -26,28 +28,42 @@ const initialFormData = {
 
 const Pocket: React.FC = () => {
   const history = useHistory();
+  const [messageVisible, setMessageVisible] = useState(false);
+  const [messageContent, setMessageContent] = useState('');
+  const [messageType, setMessageType] = useState<MessageType>('success');
   const [selectedData, _setSelectedData] = useState(initialFormData);
   const [userInputSectionShow, setUserInputSectionShow] = useState(true);
   const { addRecord } = useRecords();
+
   const setSelectedData = (newValue: Partial<typeof selectedData>) => {
     _setSelectedData({
       ...selectedData,
       ...newValue
     });
   };
+
+  const message = (type: MessageType, content: string) => {
+    setMessageVisible(true);
+    setMessageType(type);
+    setMessageContent(content);
+  };
+
   const submit = async (callback: () => void) => {
     await addRecord(selectedData)
       .then(() => {
-        window.alert('保存成功！');
+        message('success', '保存成功！');
         setSelectedData(initialFormData);
         callback();
       })
       .catch(error => {
-        window.alert(error);
+        message('error', error);
       });
   };
+
   return (
     <PocketLayout showBottomBar={false}>
+      <Message type={messageType} content={messageContent} visible={messageVisible}
+               onClose={() => setMessageVisible(false)} />
       <TopBar title="记一笔" goBack={() => history.replace('/bill')} />
       <TagsSection
         value={selectedData.selectedTags}
