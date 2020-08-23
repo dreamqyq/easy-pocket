@@ -1,26 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import styled from 'styled-components';
 import { MessageType } from 'types/message';
 import { MessageColorMap } from 'data/messageColor';
+import ReactDOM from 'react-dom';
+import { Mask } from './Mask';
 
-interface WrapperProps {
+interface MessageBoxProps {
   type: MessageType
 }
 
-const Wrapper = styled.div<WrapperProps>`
+const MessageBox = styled.div<MessageBoxProps>`
   position: fixed;
-  z-index: 9999;
-  background: ${props => MessageColorMap[props.type].backgroundColor};
-  color: ${props => MessageColorMap[props.type].textColor};
-  border-color: ${props => MessageColorMap[props.type].borderColor};
+  z-index: 2;
   top: 20px;
   left: 0;
-  width: 90%;
-  margin-left: 5%; 
+  width: 90vw;
+  margin-left: 5vw; 
   box-shadow: 0 0 8px 0 rgba(0,0,0,0.5);
   padding: 10px 20px;
   opacity: 1;
   transition: all 0.3s;
+  background: ${props => MessageColorMap[props.type].backgroundColor};
+  color: ${props => MessageColorMap[props.type].textColor};
+  border-color: ${props => MessageColorMap[props.type].borderColor};
   
   &.hidden {
    transform: translateY(-100%); 
@@ -28,26 +30,34 @@ const Wrapper = styled.div<WrapperProps>`
   }
 `;
 
+
 type Props = {
-  message: string;
+  content: string;
   visible: boolean;
-  onChange: (visible: boolean) => void;
-} & WrapperProps
+  onClose: () => void;
+} & MessageBoxProps
 
 const Message: React.FC<Props> = props => {
   useEffect(() => {
     if (props.visible) {
       setTimeout(() => {
-        props.onChange(false);
+        props.onClose();
       }, 2000);
     }
   }, [props.visible]);
 
-  return (
-    <Wrapper className={props.visible ? '' : 'hidden'} type={props.type}>
-      {props.message}
-    </Wrapper>
+  const element = (
+    <Fragment>
+      <Mask visible={props.visible} />
+      <MessageBox
+        type={props.type}
+        className={`content ${props.visible ? '' : 'hidden'}`}
+      >
+        {props.content}
+      </MessageBox>
+    </Fragment>
   );
+  return ReactDOM.createPortal(element, document.body);
 };
 
 export { Message };
