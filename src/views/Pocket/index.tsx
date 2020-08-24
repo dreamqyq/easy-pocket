@@ -11,6 +11,7 @@ import { useRecords } from 'hooks/useRecords';
 import { TopBar } from 'components/TopBar';
 import { useHistory } from 'react-router-dom';
 import { Popup } from 'components/Popup';
+import { message } from 'components/Message';
 
 const PocketLayout = styled(Layout)`
   display: flex;
@@ -29,23 +30,26 @@ const Pocket: React.FC = () => {
   const [selectedData, _setSelectedData] = useState(initialFormData);
   const [userInputSectionShow, setUserInputSectionShow] = useState(true);
   const { addRecord } = useRecords();
+
   const setSelectedData = (newValue: Partial<typeof selectedData>) => {
     _setSelectedData({
       ...selectedData,
       ...newValue
     });
   };
+
   const submit = async (callback: () => void) => {
     await addRecord(selectedData)
       .then(() => {
-        window.alert('保存成功！');
+        message('success', '保存成功！');
         setSelectedData(initialFormData);
         callback();
       })
       .catch(error => {
-        window.alert(error);
+        message('error', error);
       });
   };
+
   return (
     <PocketLayout showBottomBar={false}>
       <TopBar title="记一笔" goBack={() => history.replace('/bill')} />
