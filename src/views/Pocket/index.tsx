@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Category } from 'types/pocket';
+import { Tag } from 'types';
 import { Layout } from 'components/Layout';
 import { TagsSection } from './TagsSection';
 import { NoteSection } from './NoteSection';
 import { CategorySection } from 'components/CategorySection';
 import { NumberPadSection } from './NumberPadSection';
-import { Category } from 'types/pocket';
-import { Tag } from 'types';
 import { useRecords } from 'hooks/useRecords';
 import { TopBar } from 'components/TopBar';
 import { useHistory } from 'react-router-dom';
