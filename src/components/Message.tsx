@@ -34,6 +34,7 @@ const MessageBox = styled.div<MessageBoxProps>`
 type Props = {
   content: string;
   visible: boolean;
+  duration?: number;
   onClose: () => void;
 } & MessageBoxProps
 
@@ -42,9 +43,9 @@ const Message: React.FC<Props> = props => {
     if (props.visible) {
       setTimeout(() => {
         props.onClose();
-      }, 2000);
+      }, props.duration || 2000);
     }
-  }, [props.visible]);
+  });
 
   const element = (
     <Fragment>
@@ -64,13 +65,24 @@ const Message: React.FC<Props> = props => {
 const message = (type: MessageType, content: string) => {
   const handleClose = () => {
     ReactDOM.render(React.cloneElement(messageComponent, { visible: false }), div);
-    ReactDOM.unmountComponentAtNode(div);
-    div.remove();
+    setTimeout(() => {
+      ReactDOM.unmountComponentAtNode(div);
+      div.remove();
+    }, 2000);
   };
-  const messageComponent = <Message content={content} type={type} visible={true} onClose={() => handleClose()} />;
+  const messageComponent = <Message
+    content={content}
+    type={type}
+    visible={false}
+    onClose={() => handleClose()}
+    duration={0}
+  />;
   const div = document.createElement('div');
   document.body.append(div);
   ReactDOM.render(messageComponent, div);
+  setTimeout(() => {
+    ReactDOM.render(React.cloneElement(messageComponent, { visible: true }), div);
+  }, 0);
 };
 
 
