@@ -60,4 +60,18 @@ const Message: React.FC<Props> = props => {
   return ReactDOM.createPortal(element, document.body);
 };
 
-export { Message };
+
+const message = (type: MessageType, content: string) => {
+  const handleClose = () => {
+    ReactDOM.render(React.cloneElement(messageComponent, { visible: false }), div);
+    ReactDOM.unmountComponentAtNode(div);
+    div.remove();
+  };
+  const messageComponent = <Message content={content} type={type} visible={true} onClose={() => handleClose()} />;
+  const div = document.createElement('div');
+  document.body.append(div);
+  ReactDOM.render(messageComponent, div);
+};
+
+
+export { Message, message };
