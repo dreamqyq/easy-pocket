@@ -3,6 +3,7 @@ import { Wrapper } from './Wrapper';
 import { calculateOutput } from './calculateOutput';
 import { InputString } from 'types/pocket';
 import { stringHasPlusOrMinus, stringNumber2Decimal, stringNumberLimitLength } from 'utils';
+import { message } from 'components/Message';
 
 type Props = {
   onChange: (amount: number) => void;
@@ -37,8 +38,12 @@ const NumberPadSection: React.FC<Props> = props => {
         _setOutput('0');
       });
     } else if (text === '=') {
-      setExpression('');
-      setIsCalculate(false);
+      if (parseFloat(output) < 0) {
+        message('error', '金额不能为负数哦');
+      } else {
+        setExpression('');
+        setIsCalculate(false);
+      }
     } else {
       const outPutObj = calculateOutput(text, output, expression);
       const newExpression = outPutObj.expression;

@@ -100,7 +100,11 @@ const handleInputCharacter = (text: InputString, originOutput: string, originExp
     result.expression = characterHasPlusOrMinus(originLastWord) ? originExpression : originExpression + text;
     result.output = calculateExpression(result.expression);
   } else {
-    result.expression = originOutput + text;
+    if (originOutput === '0' && text === '+') {
+      result.expression = '';
+    } else {
+      result.expression = originOutput + text;
+    }
   }
   return result;
 };
