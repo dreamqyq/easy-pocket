@@ -70,4 +70,28 @@ const Modal: React.FC<ModalProps> = props => {
   return ReactDOM.createPortal(element, document.body);
 };
 
-export { Modal };
+const prompt = (title?: string, placeholder?: string): Promise<string> => {
+  return new Promise(resolve => {
+    const onConfirm = (value: string) => {
+      resolve(value);
+      onCancel();
+    };
+    const onCancel = () => {
+      ReactDOM.render(React.cloneElement(modalComponent, { visible: false }), div);
+      ReactDOM.unmountComponentAtNode(div);
+      div.remove();
+    };
+    const modalComponent = <Modal
+      title={title}
+      placeholder={placeholder}
+      visible={true}
+      onConfirm={(value) => onConfirm(value)}
+      onCancel={onCancel}
+    />;
+    const div = document.createElement('div');
+    document.body.append(div);
+    ReactDOM.render(modalComponent, div);
+  });
+};
+
+export { Modal, prompt };
