@@ -4,6 +4,7 @@ import { createId } from 'utils/createId';
 import { useUpdate } from './useUpdate';
 import { defaultTags } from 'data/defaultTags';
 import { message } from 'components/Message';
+import { prompt } from 'components/Modal';
 
 const useTags = () => {
   const [tags, setTags] = useState<Array<Tag>>([]);
@@ -20,8 +21,8 @@ const useTags = () => {
     window.localStorage.setItem('tags', JSON.stringify(tags));
   }, tags);
 
-  const addTag = () => {
-    const newTagName = window.prompt('请输入新标签的名字');
+  const addTag = async () => {
+    const newTagName = await prompt('新增标签', '请输入新标签的名字');
     if (newTagName === null || newTagName === '') return;
     if (isTagsHasCurrentTag(newTagName, tags)) {
       message('warning', '该标签名已存在，请不要重复添加！');
