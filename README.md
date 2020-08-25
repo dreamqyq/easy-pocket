@@ -18,15 +18,15 @@ Easy Pocket，基于 React 技术栈实现的简易记账项目。
 
 - 启动
 
-`yarn start`
+  `yarn start`
 
 - 构建
 
-`yarn build`
+  `yarn build`
 
 - 部署
 
-`yarn deploy`
+  `yarn deploy`
 
 ## 新版计划及进度（V0.3.0）WIP
 
