@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/easy-pocket/static/css/main.d302f496.chunk.css",
-    "main.js": "/easy-pocket/static/js/main.4c0e0829.chunk.js",
-    "main.js.map": "/easy-pocket/static/js/main.4c0e0829.chunk.js.map",
+    "main.js": "/easy-pocket/static/js/main.084dcb88.chunk.js",
+    "main.js.map": "/easy-pocket/static/js/main.084dcb88.chunk.js.map",
     "runtime-main.js": "/easy-pocket/static/js/runtime-main.c8b2503a.js",
     "runtime-main.js.map": "/easy-pocket/static/js/runtime-main.c8b2503a.js.map",
-    "static/js/2.b338b735.chunk.js": "/easy-pocket/static/js/2.b338b735.chunk.js",
-    "static/js/2.b338b735.chunk.js.map": "/easy-pocket/static/js/2.b338b735.chunk.js.map",
+    "static/js/2.32d821d1.chunk.js": "/easy-pocket/static/js/2.32d821d1.chunk.js",
+    "static/js/2.32d821d1.chunk.js.map": "/easy-pocket/static/js/2.32d821d1.chunk.js.map",
     "index.html": "/easy-pocket/index.html",
-    "precache-manifest.24fb83c47fc965ec6a53c58eb12e138f.js": "/easy-pocket/precache-manifest.24fb83c47fc965ec6a53c58eb12e138f.js",
+    "precache-manifest.1aeb9c9695ec82cb884dc233ddf56fe4.js": "/easy-pocket/precache-manifest.1aeb9c9695ec82cb884dc233ddf56fe4.js",
     "service-worker.js": "/easy-pocket/service-worker.js",
     "static/css/main.d302f496.chunk.css.map": "/easy-pocket/static/css/main.d302f496.chunk.css.map",
-    "static/js/2.b338b735.chunk.js.LICENSE.txt": "/easy-pocket/static/js/2.b338b735.chunk.js.LICENSE.txt",
+    "static/js/2.32d821d1.chunk.js.LICENSE.txt": "/easy-pocket/static/js/2.32d821d1.chunk.js.LICENSE.txt",
     "static/media/qrcode.png": "/easy-pocket/static/media/qrcode.2f159902.png"
   },
   "entrypoints": [
     "static/js/runtime-main.c8b2503a.js",
-    "static/js/2.b338b735.chunk.js",
+    "static/js/2.32d821d1.chunk.js",
     "static/css/main.d302f496.chunk.css",
-    "static/js/main.4c0e0829.chunk.js"
+    "static/js/main.084dcb88.chunk.js"
   ]
 }
