@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import './normal.scss';
 import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
+import './normal.scss';
 import Tags from 'views/Tags';
 import Pocket from 'views/Pocket';
 import Bill from 'views/Bill';
 import NoMatch from 'views/NoMatch';
 import TagDetail from 'views/Tags/TagDetail';
 import Chart from 'views/Chart';
-import styled from 'styled-components';
-import { Emoji } from './components/Emoji';
+import BillDetail from 'views/Bill/BillDetail';
+import { Emoji } from 'components/Emoji';
 
 const Wrapper = styled.div`
   color: #333;
@@ -74,6 +75,9 @@ function App() {
           </Route>
           <Route exact path="/bill">
             <Bill />
+          </Route>
+          <Route exact path="/bill/:recordId">
+            <BillDetail />
           </Route>
           <Route exact path="/chart">
             <Chart />
