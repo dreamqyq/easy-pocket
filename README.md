@@ -35,6 +35,3 @@ Easy Pocket，基于 React 技术栈实现的简易记账项目。
 - [ ] 「记一笔」按钮独立悬浮，在任意界面点击即可记账
 - [ ] 收入、支出界面-增加左右滑动事件及动画效果
 
-## Thanks
-
-[![WebStorm](docs/icon-webstorm.svg)](https://www.jetbrains.com/?from=easy-pocket)
