@@ -21,7 +21,7 @@ const useRecords = () => {
   }, [records]);
 
   const addRecord = (record: RecordItem) => {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       if (record.amount <= 0) {
         return reject('金额要大于 0 哦！');
       }

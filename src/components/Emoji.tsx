@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 type Props = {
   label: string;
   symbol: React.ReactNode;
   onClick?: () => void;
+  children?: ReactNode;
 }
 const Emoji: React.FC<Props> = props => (
   <span
