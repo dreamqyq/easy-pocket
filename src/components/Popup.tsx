@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -17,6 +17,7 @@ const Wrapper = styled.div`
 
 type Props = {
   show: boolean;
+  children?: ReactNode;
 };
 const Popup: React.FC<Props> = props => {
   return (

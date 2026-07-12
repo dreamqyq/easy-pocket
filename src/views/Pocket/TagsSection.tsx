@@ -4,7 +4,7 @@ import { useTags } from 'hooks/useTags';
 import { Tag } from 'types';
 
 const Wrapper = styled.section`
-  background: #fff;
+  background: var(--color-bg-surface);
   padding: 12px 16px;
   flex-grow: 1;
   display: flex;
@@ -14,23 +14,23 @@ const Wrapper = styled.section`
   > ol {
     margin-left: -12px;
     > li {
-      background: #d9d9d9;
+      background: var(--color-bg-surface4);
       border-radius: 18px;
       display: inline-block;
       padding: 3px 18px;
       font-size: 14px;
       margin: 8px 12px;
       &.selected {
-        background: #f60;
+        background: var(--color-accent);
       }
     }
   }
   > button {
     background: none;
     border: none;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--color-text);
     padding: 2px 4px;
-    color: #666;
+    color: var(--color-text-secondary);
     margin-top: 8px;
   }
 `;

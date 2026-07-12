@@ -4,7 +4,7 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   > div.output {
-    background: #fff;
+    background: var(--color-bg-surface);
     font-size: 36px;
     height: 72px;
     display: flex;
@@ -23,7 +23,7 @@ const Wrapper = styled.section`
   }
   > div.pad {
     > button {
-      border: 1px solid #e4e4e4;
+      border: 1px solid var(--color-border);
       font-size: 18px;
       width: 25%;
       height: 64px;

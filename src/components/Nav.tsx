@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { Icon } from 'components/Icon';
 
 const NavWrap = styled.nav`
-  background: #f5f5f5;
+  background: var(--color-bg-surface2);
   > ul {
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 3px var(--color-shadow);
     display: flex;
     > li {
       width: 33.333%;
@@ -36,7 +36,7 @@ const NavWrap = styled.nav`
           display: none;
         }
         &.active {
-          color: #f60;
+          color: var(--color-accent);
           > span.pocket {
             display: none;
           }
@@ -50,7 +50,7 @@ const NavWrap = styled.nav`
             display: none;
           }
           svg {
-            fill: #f60;
+            fill: var(--color-accent);
           }
         }
       }

@@ -3,6 +3,7 @@ import { Mask } from './Mask';
 import styled from 'styled-components';
 import { Button } from './Button';
 import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 const ModalBox = styled.div`
   position: fixed;
@@ -10,14 +11,14 @@ const ModalBox = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  background: #fff; 
+  background: var(--color-bg-surface); 
   width: 80%;
   padding: 10px 20px;
   
   > header{
     font-size: 18px;
     padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border-light);
   }
   > main {
     margin: 20px 0;
@@ -41,6 +42,7 @@ type ModalProps = {
   title?: string;
   placeholder?: string;
 }
+
 const Modal: React.FC<ModalProps> = props => {
   const inputRef = React.createRef<HTMLInputElement>();
   const handleConfirm = () => {
@@ -72,25 +74,29 @@ const Modal: React.FC<ModalProps> = props => {
 
 const prompt = (title?: string, placeholder?: string): Promise<string> => {
   return new Promise(resolve => {
+    const cleanup = () => {
+      root.unmount();
+      div.remove();
+    };
     const onConfirm = (value: string) => {
       resolve(value);
-      onCancel();
+      cleanup();
     };
     const onCancel = () => {
-      ReactDOM.render(React.cloneElement(modalComponent, { visible: false }), div);
-      ReactDOM.unmountComponentAtNode(div);
-      div.remove();
+      resolve('');
+      cleanup();
     };
     const modalComponent = <Modal
       title={title}
       placeholder={placeholder}
       visible={true}
-      onConfirm={(value) => onConfirm(value)}
+      onConfirm={onConfirm}
       onCancel={onCancel}
     />;
     const div = document.createElement('div');
     document.body.append(div);
-    ReactDOM.render(modalComponent, div);
+    const root = createRoot(div);
+    root.render(modalComponent);
   });
 };
 

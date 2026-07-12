@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { HashRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import './normal.scss';
+import './theme.scss';
 import Tags from 'views/Tags';
 import Pocket from 'views/Pocket';
 import Bill from 'views/Bill';
@@ -10,10 +11,12 @@ import TagDetail from 'views/Tags/TagDetail';
 import Chart from 'views/Chart';
 import BillDetail from 'views/Bill/BillDetail';
 import { Emoji } from 'components/Emoji';
+import { ThemeToggle } from 'components/ThemeToggle';
+import qrCode from 'static/qrcode.png';
 
 const Wrapper = styled.div`
-  color: #333;
-  background: #e6e6e8;
+  color: var(--color-text);
+  background: var(--color-bg);
   max-width: 500px;
   margin: 0 auto;
 `;
@@ -24,7 +27,7 @@ const QRCodeWrap = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0,0,0,0.5);
+  background: var(--color-overlay);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,6 +45,12 @@ const QRCodeWrap = styled.div`
   }
 `;
 
+const TopBarWrap = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 8px;
+`;
+
 function App() {
   const [showQRCode, setShowQRCode] = useState(false);
   useEffect(() => {
@@ -52,7 +61,7 @@ function App() {
     <Wrapper>
       {showQRCode ? (
         <QRCodeWrap>
-          <img src={require('static/qrcode.png')} alt="https://dreamqyq.github.io/easy-pocket/" /> <br />
+          <img src={qrCode} alt="https://dreamqyq.github.io/easy-pocket/" /> <br />
           温馨提示：使用手机扫码查看体验更好呦 <br />
           <Emoji
             label='close'
@@ -62,6 +71,9 @@ function App() {
           </Emoji>
         </QRCodeWrap>
       ) : null}
+      <TopBarWrap>
+        <ThemeToggle />
+      </TopBarWrap>
       <Router>
         <Switch>
           <Route exact path="/tags">

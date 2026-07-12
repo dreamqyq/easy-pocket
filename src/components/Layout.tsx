@@ -16,23 +16,20 @@ type Props = {
   className?: string;
   showBottomBar?: boolean;
   header?: ReactNode;
+  children?: ReactNode;
 };
-const Layout: React.FC<Props> = props => {
+const Layout: React.FC<Props> = ({ className, showBottomBar = true, header, children }) => {
   const mainRef = useRef<HTMLDivElement>(null);
 
   return (
     <Wrapper>
-      {props.header ? <header>{props.header}</header> : null}
-      <main ref={mainRef} className={props.className}>
-        {props.children}
+      {header ? <header>{header}</header> : null}
+      <main ref={mainRef} className={className}>
+        {children}
       </main>
-      {props.showBottomBar ? <Nav /> : null}
+      {showBottomBar ? <Nav /> : null}
     </Wrapper>
   );
-};
-
-Layout.defaultProps = {
-  showBottomBar: true
 };
 
 export { Layout };
