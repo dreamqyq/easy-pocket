@@ -12,7 +12,7 @@ Easy Pocket，基于 React 技术栈实现的简易记账项目。
 
 ### 当前版本 V0.3.0
 
-项目主要技术栈包括：React 18、TypeScript 5、Vite 6、React-Router、React Hook、styled-component 等。可实现基本的记账功能以及数据保存功能（数据保存基于 LocalStorage）。
+项目主要技术栈包括：React 18、TypeScript 5、Vite 6、React-Router、React Hook、styled-components 等。可实现基本的记账功能以及数据保存功能（数据保存基于 localStorage）。
 
 ## 项目运行命令
 
@@ -39,8 +39,10 @@ Easy Pocket，基于 React 技术栈实现的简易记账项目。
 - 构建工具从 Webpack 4 迁移到 Vite 6
 - React 升级到 18.3，使用 `createRoot` API
 - TypeScript 升级到 5.6
+- ECharts 升级到 5.x，采用按需引入 tree-shaking
 - 移除 CRA 遗留的 config/ scripts/ 目录
 - SVG 图标系统适配 Vite 的 import.meta.glob
+- 新增暗色模式（CSS 变量 + localStorage 持久化 + 跟随系统偏好）
 - 依赖精简，构建速度大幅提升
 
 ### V0.2.0 — 账单编辑功能
