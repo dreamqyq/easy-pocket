@@ -1,5 +1,5 @@
-@import-normalize ;
-@import 'helper';
+@use "normalize.css";
+@use "helper" as *;
 
 * {
   margin: 0;

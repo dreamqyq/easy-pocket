@@ -48,8 +48,8 @@ const Bill: React.FC = () => {
           <Header>{date}</Header>
           <div>
             {records.map(record => (
-              <Link to="/bill/1">
-                <Item key={record.createAt}>
+              <Link to="/bill/1" key={record.createAt}>
+                <Item>
                   <div className="tags oneLine">
                     {record.selectedTags
                       .map(tag => <span key={tag.id}>{tag.name}</span>)

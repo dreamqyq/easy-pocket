@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React from 'react';
 import { Category } from 'types/pocket';
 
 type WrapProps = {
@@ -39,18 +39,17 @@ type Props = {
   height?: number;
 };
 
-const CategorySection: React.FC<Props> = props => {
+const CategorySection: React.FC<Props> = ({ value, onChange, background = '#fff', height = 72 }) => {
   const categoryMap = { '-': '支出', '+': '收入' };
-  const currentCategory = props.value;
-  const [categoryList] = useState<Array<Category>>(['-', '+']);
+  const categoryList: Array<Category> = ['-', '+'];
   return (
-    <Wrapper background={props.background!} height={props.height!}>
+    <Wrapper background={background} height={height}>
       <ul>
         {categoryList.map(category => (
           <li
             key={category}
-            className={category === currentCategory ? 'active' : ''}
-            onClick={() => props.onChange(category)}
+            className={category === value ? 'active' : ''}
+            onClick={() => onChange(category)}
           >
             {categoryMap[category]}
           </li>
@@ -58,11 +57,6 @@ const CategorySection: React.FC<Props> = props => {
       </ul>
     </Wrapper>
   );
-};
-
-CategorySection.defaultProps = {
-  background: '#fff',
-  height: 72
 };
 
 export { CategorySection };

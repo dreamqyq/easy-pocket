@@ -19,7 +19,7 @@ const NoMatch: React.FC = () => {
   return <Wrapper>
     <p> 404 </p>
     <p> Page is Not Found </p>
-    <Link to="/">Visit homepage -></Link>
+    <Link to="/">Visit homepage Visit homepage →gt;</Link>
   </Wrapper>;
 };
 

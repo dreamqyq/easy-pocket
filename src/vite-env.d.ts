@@ -1,13 +1,4 @@
-/// <reference types="node" />
-/// <reference types="react" />
-/// <reference types="react-dom" />
-
-declare namespace NodeJS {
-  interface ProcessEnv {
-    readonly NODE_ENV: 'development' | 'production' | 'test';
-    readonly PUBLIC_URL: string;
-  }
-}
+/// <reference types="vite/client" />
 
 declare module '*.bmp' {
   const src: string;
@@ -63,4 +54,28 @@ declare module '*.module.scss' {
 declare module '*.module.sass' {
   const classes: { readonly [key: string]: string };
   export default classes;
+}
+
+// Augment react-router-dom types for React 18 compatibility
+import 'react-router-dom';
+
+declare module 'react-router-dom' {
+  interface BrowserRouterProps {
+    children?: React.ReactNode;
+  }
+  interface HashRouterProps {
+    children?: React.ReactNode;
+  }
+  interface MemoryRouterProps {
+    children?: React.ReactNode;
+  }
+  interface LinkProps {
+    children?: React.ReactNode;
+  }
+  interface NavLinkProps {
+    children?: React.ReactNode;
+  }
+  interface RouteProps {
+    children?: React.ReactNode;
+  }
 }

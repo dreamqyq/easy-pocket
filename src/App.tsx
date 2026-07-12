@@ -9,7 +9,8 @@ import NoMatch from 'views/NoMatch';
 import TagDetail from 'views/Tags/TagDetail';
 import Chart from 'views/Chart';
 import BillDetail from 'views/Bill/BillDetail';
-import { Emoji } from 'components/Emoji';
+import { Emoji } from "components/Emoji";
+import qrCode from "static/qrcode.png";
 
 const Wrapper = styled.div`
   color: #333;
@@ -52,7 +53,7 @@ function App() {
     <Wrapper>
       {showQRCode ? (
         <QRCodeWrap>
-          <img src={require('static/qrcode.png')} alt="https://dreamqyq.github.io/easy-pocket/" /> <br />
+          <img src={qrCode} alt="https://dreamqyq.github.io/easy-pocket/" /> <br />
           温馨提示：使用手机扫码查看体验更好呦 <br />
           <Emoji
             label='close'
