@@ -1,5 +1,5 @@
-@import-normalize ;
-@import 'helper';
+@use "normalize.css";
+@use "helper" as *;
 
 * {
   margin: 0;
@@ -9,8 +9,6 @@
 *,
 *::after,
 *::before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -26,9 +24,7 @@ ol {
 a {
   text-decoration: none;
   color: inherit;
-  -moz-user-select: none; /* Firefox私有属性 */
-  -webkit-user-select: none; /* WebKit内核私有属性 */
-  user-select: none; /* CSS3属性 */
+  user-select: none;
 }
 
 button,
@@ -40,7 +36,7 @@ body {
   font-family: $font-normal;
   line-height: 1.2;
   font-size: 16px;
-  background: #333;
+  background: var(--color-bg-body);
 }
 
 .icon {

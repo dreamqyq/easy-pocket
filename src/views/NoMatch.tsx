@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     margin: 16px;  
   }
   a {
-    color: blue;
+    color: var(--color-accent);
     text-decoration: underline;
   }
 `;

@@ -1,0 +1,56 @@
+// 亮色主题（默认）
+:root,
+[data-theme='light'] {
+  --color-bg: #e6e6e8;
+  --color-bg-body: #333;
+  --color-bg-surface: #fff;
+  --color-bg-surface2: #f5f5f5;
+  --color-bg-surface3: #e4e4e4;
+  --color-bg-surface4: #d9d9d9;
+  --color-text: #333;
+  --color-text-secondary: #666;
+  --color-text-tertiary: #999;
+  --color-accent: #f60;
+  --color-border: #e4e4e4;
+  --color-border-light: #eee;
+  --color-border-dark: #d5d5d5;
+  --color-shadow: rgba(0, 0, 0, 0.25);
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  --color-message-success-bg: #edf7ed;
+  --color-message-success-text: #1e4620;
+  --color-message-success-border: #c3e6cb;
+  --color-message-warning-bg: #fff4e5;
+  --color-message-warning-text: #663c00;
+  --color-message-warning-border: #f5c6cb;
+  --color-message-error-bg: #fdecea;
+  --color-message-error-text: #611a15;
+  --color-message-error-border: #ffeeba;
+}
+
+// 暗色主题
+[data-theme='dark'] {
+  --color-bg: #1a1a2e;
+  --color-bg-body: #0f0f1a;
+  --color-bg-surface: #2a2a3e;
+  --color-bg-surface2: #222236;
+  --color-bg-surface3: #333350;
+  --color-bg-surface4: #3a3a55;
+  --color-text: #e0e0e0;
+  --color-text-secondary: #a0a0b0;
+  --color-text-tertiary: #707080;
+  --color-accent: #ff8c42;
+  --color-border: #444460;
+  --color-border-light: #3a3a50;
+  --color-border-dark: #555570;
+  --color-shadow: rgba(0, 0, 0, 0.5);
+  --color-overlay: rgba(0, 0, 0, 0.7);
+  --color-message-success-bg: #1a3a1a;
+  --color-message-success-text: #8fd18f;
+  --color-message-success-border: #2d5a2d;
+  --color-message-warning-bg: #3a2a0a;
+  --color-message-warning-text: #e0b050;
+  --color-message-warning-border: #5a4020;
+  --color-message-error-bg: #3a1a1a;
+  --color-message-error-text: #e08080;
+  --color-message-error-border: #5a2a2a;
+}

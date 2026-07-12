@@ -8,9 +8,9 @@ import { Button } from 'components/Button';
 import { Center } from 'components/Center';
 
 const TagList = styled.ol`
-  background: #fff;
+  background: var(--color-bg-surface);
   > li {
-    border-bottom: 1px solid #d5d5d5;
+    border-bottom: 1px solid var(--color-border-dark);
     padding: 12px 0;
     width: 94%;
     margin-left: 3%;

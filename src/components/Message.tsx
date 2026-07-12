@@ -1,7 +1,8 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MessageType } from 'types/message';
 import { MessageColorMap } from 'data/messageColor';
+import { createRoot } from 'react-dom/client';
 import ReactDOM from 'react-dom';
 import { Mask } from './Mask';
 
@@ -38,16 +39,17 @@ type Props = {
   onClose: () => void;
 } & MessageBoxProps
 
-const Message: React.FC<Props> = props => {
+const MessageComponent: React.FC<Props> = props => {
   useEffect(() => {
     if (props.visible) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         props.onClose();
       }, props.duration || 2000);
+      return () => clearTimeout(timer);
     }
-  });
+  }, [props.visible, props.duration, props.onClose]);
 
-  const element = (
+  return ReactDOM.createPortal(
     <Fragment>
       <Mask visible={props.visible} />
       <MessageBox
@@ -56,34 +58,47 @@ const Message: React.FC<Props> = props => {
       >
         {props.content}
       </MessageBox>
-    </Fragment>
+    </Fragment>,
+    document.body
   );
-  return ReactDOM.createPortal(element, document.body);
 };
-
 
 const message = (type: MessageType, content: string) => {
-  const handleClose = () => {
-    ReactDOM.render(React.cloneElement(messageComponent, { visible: false }), div);
-    setTimeout(() => {
-      ReactDOM.unmountComponentAtNode(div);
-      div.remove();
-    }, 2000);
-  };
-  const messageComponent = <Message
-    content={content}
-    type={type}
-    visible={false}
-    onClose={() => handleClose()}
-    duration={0}
-  />;
   const div = document.createElement('div');
   document.body.append(div);
-  ReactDOM.render(messageComponent, div);
-  setTimeout(() => {
-    ReactDOM.render(React.cloneElement(messageComponent, { visible: true }), div);
-  }, 0);
+  const root = createRoot(div);
+
+  const cleanup = () => {
+    root.unmount();
+    div.remove();
+  };
+
+  const App = () => {
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+      const showTimer = setTimeout(() => setVisible(true), 0);
+      return () => clearTimeout(showTimer);
+    }, []);
+
+    const handleClose = () => {
+      setVisible(false);
+      // Give the hide animation time to play before cleanup
+      setTimeout(cleanup, 300);
+    };
+
+    return (
+      <MessageComponent
+        content={content}
+        type={type}
+        visible={visible}
+        onClose={handleClose}
+        duration={2000}
+      />
+    );
+  };
+
+  root.render(<App />);
 };
 
-
-export { Message, message };
+export { MessageComponent as Message, message };

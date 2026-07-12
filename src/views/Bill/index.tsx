@@ -9,14 +9,14 @@ import { useRecords } from 'hooks/useRecords';
 const Item = styled.div`
   display: flex;
   justify-content: space-between;
-  background: #fff;
+  background: var(--color-bg-surface);
   font-size: 18px;
   line-height: 20px;
   padding: 10px 16px;
   > .note {
     margin-right: auto;
     margin-left: 16px;
-    color: #999;
+    color: var(--color-text-tertiary);
   }
 `;
 

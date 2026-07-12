@@ -10,7 +10,7 @@ import { Tag } from 'types';
 import { TopBar } from 'components/TopBar';
 
 const InputWrapper = styled.div`
-  background: #fff;
+  background: var(--color-bg-surface);
   padding: 0 16px;
 `;
 

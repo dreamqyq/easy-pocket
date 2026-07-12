@@ -9,7 +9,7 @@ const TopBarWrap = styled.header`
   align-items: center;
   line-height: 20px;
   padding: 14px;
-  background: #fff;
+  background: var(--color-bg-surface);
   margin-bottom: 8px;
 `;
 

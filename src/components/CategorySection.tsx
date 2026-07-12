@@ -21,7 +21,7 @@ const Wrapper = styled.section<WrapProps>`
           content: '';
           height: 3px;
           width: 100%;
-          background: #333;
+          background: var(--color-text);
           display: block;
           position: absolute;
           bottom: 0;
@@ -61,7 +61,7 @@ const CategorySection: React.FC<Props> = props => {
 };
 
 CategorySection.defaultProps = {
-  background: '#fff',
+  background: 'var(--color-bg-surface)',
   height: 72
 };
 

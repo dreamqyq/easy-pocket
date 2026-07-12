@@ -10,14 +10,14 @@ const ModalBox = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  background: #fff; 
+  background: var(--color-bg-surface); 
   width: 80%;
   padding: 10px 20px;
   
   > header{
     font-size: 18px;
     padding: 10px 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--color-border-light);
   }
   > main {
     margin: 20px 0;
